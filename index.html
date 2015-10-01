@@ -21,9 +21,11 @@
 				<!-- HEAD -->
 				<div class="col-xs-12 header">
 					<h1 style="display: inline-block; color: white">WHATEVER</h1>
-					<form ng-submit="main.do()" style="display: inline-block">
-						<input type="text" placeholder="Search" ng-model="main.search.query">
-					</form>
+					<div style="display: inline-block; position: absolute; right: 20px; top: 30px;">
+						<form ng-submit="main.do()">
+							<input type="text" placeholder="Search" ng-model="main.search.query">
+						</form>
+					</div>
 				</div>
 			</div>
 			<div class="row">

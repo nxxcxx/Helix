@@ -1,5 +1,4 @@
 angular.module( 'app', [] )
-
 .controller( 'mainCtrl', [ '$scope', 'MD', function ( $scope, MD )  {
 
 	window.SCOPE = $scope;
@@ -18,6 +17,7 @@ angular.module( 'app', [] )
 	}, true );
 
 	vm.do = function() {
+		if ( vm.search.query === '' ) return;
 		MD.req( vm.search.query );
 	};
 
@@ -45,6 +45,7 @@ angular.module( 'app', [] )
 	var API_KEY = '374c0342a6406dfe0aeb3de2ea042c59';
 	var url = {
 		search: 'http://api.themoviedb.org/3/search/movie'
+		// search: 'http://api.themoviedb.org/3/search/multi'
 	};
 	var searchResult = null;
 
