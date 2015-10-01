@@ -4,12 +4,22 @@ angular.module( 'app', [] )
 
 	window.SCOPE = $scope;
 	var vm = this;
+	vm.search = {
+		query: ''
+	};
 
 	vm.movieItems = null;
-	MD.req();
 	$scope.$watch( MD.getRes, function ( res ) {
-		if ( res ) vm.movieItems = res.results;
+		if ( res ) {
+			vm.movieItems = res.results.filter( function ( el ) {
+				return el.poster_path !== null;
+			} );
+		}
 	}, true );
+
+	vm.do = function() {
+		MD.req( vm.search.query );
+	};
 
 } ] )
 .directive( 'movieItem', [ 'MD', function ( MD ) {
@@ -38,14 +48,14 @@ angular.module( 'app', [] )
 	};
 	var searchResult = null;
 
-	function req() {
+	function req( searchQuery ) {
 
 		$http({
 			method: 'GET',
 			url: url.search,
 			params:{
 				api_key: API_KEY,
-				query: 'maze'
+				query: searchQuery
 			}
 		}).success( function( res ) {
 			searchResult = res;

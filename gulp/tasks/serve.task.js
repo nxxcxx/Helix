@@ -5,7 +5,7 @@ module.exports = function () {
 
 	browserSync.init( {
 
-		files: [ './css/*.css' ],
+		files: [ './build/css/*.css' ],
 		injectChanges: true,
 		server: {
 			baseDir: '.',
@@ -21,11 +21,11 @@ module.exports = function () {
 	gulp.watch( [
 
 		'index.html',
-		'./build/**/*',
+		'./build/js/*',
 		'./src/template/**/*'
 
 	], browserSync.reload );
 
-	gulp.watch( [ './css/*.sass' ], [ 'sass' ] );
+	gulp.watch( [ './sass/*.sass' ], [ 'sass' ] );
 
 };

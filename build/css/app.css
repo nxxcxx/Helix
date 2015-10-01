@@ -3,3 +3,20 @@ html, body {
 
 ul, li {
   margin: 0px; }
+
+h1 {
+  font-weight: bold; }
+
+.header {
+  background: crimson;
+  height: 80px; }
+
+.tempBorder {
+  border: 1px solid black;
+  height: 300px; }
+
+.tempNoPoster {
+  width: 154px;
+  height: 100px;
+  background: black;
+  color: white; }
