@@ -1,0 +1,7 @@
+<div ng-show="mv.poster_path">
+	{{ mv.original_title }}
+	<br>
+	<img ng-if="mv.poster_path" ng-src="http://image.tmdb.org/t/p/w154/{{mv.poster_path}}">
+	<!-- todo: if poster_path is null, show not available poster img, or just disable entire div?-->
+	<!-- <div ng-if="!mv.poster_path" style="width: 154px; height: 100px; background: black; color: white">NO POSTER</div> -->
+</div>
