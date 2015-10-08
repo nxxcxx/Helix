@@ -22,7 +22,7 @@ module.exports = function () {
 
 		'index.html',
 		'./build/js/*',
-		'./src/template/**/*'
+		'./src/**/*.html'
 
 	], browserSync.reload );
 

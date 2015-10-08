@@ -1,7 +1,7 @@
 <div>
-	{{ mv.original_title }}
-	<br>
-	<img ng-src="http://image.tmdb.org/t/p/w154/{{mv.poster_path}}">
+	<img ng-src="http://image.tmdb.org/t/p/w154/{{movieItem.poster_path}}" width="150" height="230">
 	<!-- todo: if poster_path is null, show not available poster img, or just disable entire div? -->
 	<!-- <div ng-if="!mv.poster_path" class="tempNoPoster">NO POSTER</div> -->
+	<!-- <br>
+	{{ movieItem.original_title }} -->
 </div>
