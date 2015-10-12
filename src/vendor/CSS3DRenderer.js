@@ -9,21 +9,18 @@ THREE.CSS3DObject = function ( element ) {
 
 	this.element = element;
 	this.element.style.position = 'absolute';
-
-	this.addEventListener( 'removed', function ( event ) {
-
-		if ( this.element.parentNode !== null ) {
-
-			this.element.parentNode.removeChild( this.element );
-
-		}
-
-	} );
+	console.log( 1 );
 
 };
 
 THREE.CSS3DObject.prototype = Object.create( THREE.Object3D.prototype );
 THREE.CSS3DObject.prototype.constructor = THREE.CSS3DObject;
+
+THREE.CSS3DObject.prototype.disposeElement = function () {
+	if ( this.element.parentNode !== null ) {
+		this.element.parentNode.removeChild( this.element );
+	}
+};
 
 THREE.CSS3DSprite = function ( element ) {
 

@@ -20,6 +20,7 @@ var SCENE_SETTINGS = {
 // ---- Scene
 CANVAS = document.getElementById( 'canvas-container' );
 SCENE = new THREE.Scene();
+global.SCENE = SCENE;
 // ---- Camera
 CAMERA = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 10, 100000 );
 // ---- Camera orbit controls
