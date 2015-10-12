@@ -1,5 +1,9 @@
-html, body {
-  height: 100%; }
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  background: #0a0a0a; }
 
 ul, li {
   margin: 0px; }
@@ -19,3 +23,20 @@ h1 {
   height: 100px;
   background: black;
   color: white; }
+
+#canvas-container {
+  border: 1px solid black; }
+
+canvas {
+  display: block;
+  vertical-align: top; }
+
+#stats {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  -webkit-user-select: none; }
+
+.posterElem:hover {
+  cursor: pointer;
+  border: 2px solid white; }

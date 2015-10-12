@@ -4,41 +4,31 @@
 		<meta charset="utf-8">
 		<title></title>
 
-		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" charset="utf-8">
+		<!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" charset="utf-8"> -->
 		<link rel="stylesheet" href="build/css/app.css" charset="utf-8">
-
-		<script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
-		<script src="bower_components/angular/angular.js" charset="utf-8"></script>
-		<script src="bower_components/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
-		<script src="bower_components/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
-		<script src="build/js/app.js" charset="utf-8"></script>
 
 	</head>
 	<body ng-controller="mainCtrl as main">
 
-		<div class="container-fluid">
-			<div class="row">
-				<!-- HEAD -->
-				<div class="col-xs-12 header">
-					<h1 style="display: inline-block; color: white"></h1>
-					<div style="display: inline-block; position: absolute; left: 20px; top: 30px;">
-						<form ng-submit="main.search()">
-							<input type="text" placeholder="Search" ng-model="main.search.query">
-						</form>
-					</div>
-				</div>
-			</div>
+		<form ng-submit="main.search()">
+			<input type="text" placeholder="Search" ng-model="main.search.query">
+		</form>
+		
+		<div id="canvas-container"></div>
 
-			<div class="row">
-				<!-- movie items -->
-				<!-- <div ng-repeat="mv in main.movieItems" class="col-xs-12 col-sm-3 col-md-3 col-lg-2 tempBorder" >
-					<movie-item movie-item="mv"></movie-item>
-				</div> -->
-				<div ng-repeat="mv in main.movieItems" style="display: inline-block;">
-					<movie-item movie-item="mv"></movie-item>
-				</div>
-			</div>
-		</div>
+		<script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
+		<script src="bower_components/angular/angular.js" charset="utf-8"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
+		<!-- <script src="bower_components/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script> -->
+
+		<script src="src/vendor/webgl/three.js" charset="utf-8"></script>
+		<script src="src/vendor/webgl/CSS3DRenderer.js" charset="utf-8"></script>
+		<script src="src/vendor/webgl/dat.gui.min.js" charset="utf-8"></script>
+		<script src="src/vendor/webgl/OrbitControls.js" charset="utf-8"></script>
+		<script src="src/vendor/webgl/stats.min.js" charset="utf-8"></script>
+
+		<script src="build/js/app.js" charset="utf-8"></script>
+		<script src="build/js/indexGL.js" charset="utf-8"></script>
 
 	</body>
 </html>
