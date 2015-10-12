@@ -10,3 +10,5 @@ angular.module( 'app', [] )
 .factory( 'TMDb', require( './TMDb.fac.js' ) )
 .factory( 'EVT', require( './events.fac.js' ) )
 ;
+
+require( './indexGL.js' );

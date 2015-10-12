@@ -9,11 +9,9 @@ var SCREEN_RATIO = WIDTH / HEIGHT;
 
 // ---- Settings
 var SCENE_SETTINGS = {
-
 	bgColor: 2368557,
 	enableGridHelper: true,
 	enableAxisHelper: true
-
 };
 
 // ---- Scene
@@ -45,93 +43,12 @@ CANVAS.appendChild( RENDERER.domElement );
 STATS = new Stats();
 CANVAS.appendChild( STATS.domElement );
 
-// ---- grid & axis helper
-var gridHelper = new THREE.GridHelper( 600, 50 );
-gridHelper.setColors( 48127, 16777215 );
-gridHelper.material.opacity = 0.1;
-gridHelper.material.transparent = true;
-gridHelper.position.y = -300;
-SCENE.add( gridHelper );
-
-var axisHelper = new THREE.AxisHelper( 50 );
-SCENE.add( axisHelper );
-
-function updateHelpers() {
-	gridHelper.visible = !!SCENE_SETTINGS.enableGridHelper;
-	axisHelper.visible = !!SCENE_SETTINGS.enableAxisHelper;
-}
-updateHelpers();
-
-//source: gui.js
-var gui, gui_display, gui_settings;
-
-function initGui() {
-
-	// gui_settings.add( Object, property, min, max, step ).name( 'name' );
-	gui = new dat.GUI();
-	gui.width = 300;
-	dat.GUI.toggleHide();
-
-	gui_display = gui.addFolder( 'Display' );
-	gui_display.autoListen = false;
-
-	gui_settings = gui.addFolder( 'Settings' );
-
-	gui_settings.addColor( SCENE_SETTINGS, 'bgColor' ).name( 'Background' );
-	gui_settings.add( CAMERA, 'fov', 25, 120, 1 ).name( 'FOV' );
-
-	gui_display.open();
-	gui_settings.open();
-
-	gui_settings.__controllers.forEach( function ( controller ) {
-		controller.onChange( updateSettings );
-	} );
-}
-
-function updateSettings() {
-
-	CAMERA.updateProjectionMatrix();
-	RENDERER.setClearColor( SCENE_SETTINGS.bgColor, 1 );
-}
-
-function updateGuiDisplay() {
-
-	gui_display.__controllers.forEach( function ( controller ) {
-		controller.updateDisplay();
-	} );
-}
-
 //source: main.js
 function main() {
 
-	initGui();
-
-
 }
 
-// function makePosterItem( posterObject ) {
-//
-// 	console.log( posterObject );
-// 	var elem = document.createElement( 'div' );
-// 	elem.className = 'posterElem';
-// 	elem.style.backgroundImage = "url('http://image.tmdb.org/t/p/w154/" + posterObject.poster_path + "')";
-// 	elem.style.width = '150px';
-// 	elem.style.height = '230px';
-// 	elem.textContent = 'TEST TEXT';
-// 	var css3dObj = new THREE.CSS3DObject( elem );
-// 	SCENE.add( css3dObj );
-// 	return css3dObj;
-//
-// }
-
-function makeMultiPosterItem( posterObjectMulti ) {
-	for ( var i = 0 ; i < posterObjectMulti.length; i ++ ) {
-		var poster = makePosterItem( posterObjectMulti[ i ] );
-		poster.position.setX( 200 * i );
-	}
-}
-
-function makePosterItemHelix( posterObjectMulti ) {
+global.makeHelixPosters = function( posterObjectMulti ) {
 	var vector = new THREE.Vector3();
 	var allPosters = new THREE.Object3D();
 	for ( var i = 0 ; i < posterObjectMulti.length; i ++ ) {
@@ -159,7 +76,7 @@ function makePosterItemHelix( posterObjectMulti ) {
 		allPosters.add( css3dObj );
 	}
 	SCENE.add( allPosters );
-}
+};
 
 //source: run.js
 function update() {
@@ -174,13 +91,13 @@ function run() {
 	update();
 	RENDERER.render( SCENE, CAMERA );
 	STATS.update();
+	
 }
 
 //source: events.js
 window.addEventListener( 'keypress', function ( event ) {
 	switch ( event.keyCode ) {
-		case 65:
-			/*A*/
+		case 65:/*A*/
 			break;
 	}
 } );
