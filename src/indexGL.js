@@ -6,6 +6,9 @@ var WIDTH = window.innerWidth;
 var HEIGHT = window.innerHeight;
 var PIXEL_RATIO = window.devicePixelRatio || 1;
 var SCREEN_RATIO = WIDTH / HEIGHT;
+var MOUSE_X = WIDTH * 0.5;
+var MOUSE_Y = HEIGHT * 0.5;
+var WHEEL_DY = 0;
 
 // ---- Settings
 var SCENE_SETTINGS = {
@@ -18,35 +21,96 @@ var SCENE_SETTINGS = {
 CANVAS = document.getElementById( 'canvas-container' );
 SCENE = new THREE.Scene();
 // ---- Camera
-CAMERA = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 10, 100000 );
-// CAMERA orbit control
-CAMERA_CTRL = new THREE.OrbitControls( CAMERA, CANVAS );
-CAMERA_CTRL.object.position.z = 600;
-CAMERA_CTRL.update();
-
+CAMERA = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 10, 100000 );
+// ---- Camera orbit controls
+// CAMERA_CTRL = new THREE.OrbitControls( CAMERA, CANVAS );
+// CAMERA_CTRL.object.position.z = 600;
+// CAMERA_CTRL.update();
+// global.cam = CAMERA_CTRL;
+global.cam = CAMERA;
 // ---- Renderer
-// RENDERER = new THREE.WebGLRenderer( {
-// 	antialias: true,
-// 	alpha: true
-// } );
-
-
 RENDERER = new THREE.CSS3DRenderer();
-
 RENDERER.setSize( WIDTH, HEIGHT );
-// RENDERER.setPixelRatio( PIXEL_RATIO );
-// RENDERER.setClearColor( SCENE_SETTINGS.bgColor, 1 );
-// RENDERER.autoClear = false;
 CANVAS.appendChild( RENDERER.domElement );
-
 // ---- Stats
 STATS = new Stats();
 CANVAS.appendChild( STATS.domElement );
 
-//source: main.js
 function main() {
 
 }
+
+function update() {
+
+	// var dx = - ( ( MOUSE_X / WIDTH ) - 0.5 );
+	// if ( Math.abs( dx ) > 0.4 ) {
+	// 	CAMERA.rotateY( dx * 0.01 );
+	// }
+
+	//
+	// var dy = - ( ( MOUSE_Y / HEIGHT ) - 0.5 );
+	// if ( Math.abs( dy ) > 0.2 ) {
+	// 	CAMERA.position.y += dy * 10.0;
+	// }
+
+	CAMERA.position.y += WHEEL_DY * 1.0;
+	CAMERA.rotateY( WHEEL_DY * 0.025 );
+	WHEEL_DY *= 0.95;
+
+}
+
+// ----  draw loop
+function run() {
+
+	requestAnimationFrame( run );
+	// RENDERER.clear();
+	update();
+	RENDERER.render( SCENE, CAMERA );
+	STATS.update();
+
+}
+
+CANVAS.addEventListener( 'mousemove', function ( event ) {
+
+	MOUSE_X = event.clientX;
+	MOUSE_Y = event.clientY;
+
+} );
+
+window.addEventListener( 'wheel', function ( event ) {
+
+	WHEEL_DY = Math.sign( event.deltaY );
+
+} );
+
+window.addEventListener( 'keypress', function ( event ) {
+	switch ( event.keyCode ) {
+		case 119:/*w*/
+			WHEEL_DY = 1.0;
+			break;
+		case 115:/*s*/
+			WHEEL_DY = -1.0;
+			break;
+	}
+} );
+
+var util = require( './util.js' );
+window.addEventListener( 'resize', util.debounce( onWindowResize, 50 ) );
+
+function onWindowResize() {
+	WIDTH = window.innerWidth;
+	HEIGHT = window.innerHeight;
+	PIXEL_RATIO = window.devicePixelRatio || 1;
+	SCREEN_RATIO = WIDTH / HEIGHT;
+	CAMERA.aspect = SCREEN_RATIO;
+	CAMERA.updateProjectionMatrix();
+	RENDERER.setSize( WIDTH, HEIGHT );
+}
+
+
+
+main();
+run();
 
 global.makeHelixPosters = function( posterObjectMulti ) {
 	var vector = new THREE.Vector3();
@@ -77,69 +141,3 @@ global.makeHelixPosters = function( posterObjectMulti ) {
 	}
 	SCENE.add( allPosters );
 };
-
-//source: run.js
-function update() {
-
-}
-
-// ----  draw loop
-function run() {
-
-	requestAnimationFrame( run );
-	// RENDERER.clear();
-	update();
-	RENDERER.render( SCENE, CAMERA );
-	STATS.update();
-	
-}
-
-//source: events.js
-window.addEventListener( 'keypress', function ( event ) {
-	switch ( event.keyCode ) {
-		case 65:/*A*/
-			break;
-	}
-} );
-
-window.addEventListener( 'resize', debounce( onWindowResize, 50 ) );
-
-function onWindowResize() {
-
-	WIDTH = window.innerWidth;
-	HEIGHT = window.innerHeight;
-
-	PIXEL_RATIO = window.devicePixelRatio || 1;
-	SCREEN_RATIO = WIDTH / HEIGHT;
-
-	CAMERA.aspect = SCREEN_RATIO;
-	CAMERA.updateProjectionMatrix();
-
-	RENDERER.setSize( WIDTH, HEIGHT );
-	RENDERER.setPixelRatio( PIXEL_RATIO );
-}
-
-//source: util.js
-function debounce( func, wait, immediate ) {
-	var _this = this,
-		_arguments = arguments;
-
-	var timeout;
-	return function () {
-
-		var context = _this,
-			args = _arguments;
-		var later = function later() {
-
-			timeout = null;
-			if ( !immediate ) func.apply( context, args );
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout( timeout );
-		timeout = setTimeout( later, wait );
-		if ( callNow ) func.apply( context, args );
-	};
-}
-
-main();
-run();
