@@ -79,7 +79,7 @@ CANVAS.addEventListener( 'mousemove', function ( event ) {
 
 window.addEventListener( 'wheel', function ( event ) {
 
-	WHEEL_DY = Math.sign( event.deltaY );
+	WHEEL_DY = -Math.sign( event.deltaY );
 
 } );
 
