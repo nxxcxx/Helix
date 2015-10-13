@@ -1,5 +1,5 @@
 module.exports = [ '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE',
-function ( $scope, TMDb, EVT, helix, ENGINE )  {
+function ( $scope, TMDb, EVT, helix, ENGINE ) {
 
 	var vm = this;
 	vm.search = {
@@ -7,10 +7,10 @@ function ( $scope, TMDb, EVT, helix, ENGINE )  {
 	};
 	vm.movieItems = null;
 
-	$scope.$watch( TMDb.getRes, function ( movItems, prevMovItems ) {
+	$scope.$watch( TMDb.getRes, function ( movItems ) {
 
 		vm.movieItems = movItems;
-		helix.makeHelixPosters( movItems.slice( prevMovItems.length ), prevMovItems.length );
+		helix.makeHelixPosters( movItems.slice( TMDb.prevResultLen ), TMDb.prevResultLen );
 
 	}, true );
 
@@ -18,14 +18,12 @@ function ( $scope, TMDb, EVT, helix, ENGINE )  {
 	vm.search = function () {
 		if ( vm.search.query === '' ) return;
 		if ( prevQuery !== vm.search.query ) {
-			TMDb.clearSearch();
 			prevQuery = vm.search.query;
-
+			TMDb.clearSearch();
 			helix.clearAll();
 			ENGINE.resetCamera();
-
 		}
-		TMDb.req( vm.search );
+		TMDb.request( vm.search );
 	};
 
 	vm.makeHelixWall = function () {

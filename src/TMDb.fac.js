@@ -2,6 +2,7 @@ module.exports = [ '$http', 'TMDB_API', 'EVT',
 function ( $http, TMDB_API, EVT ) {
 
 	var searchResult = [];
+	var prevResultLen = 0;
 	var totalPages = -1;
 	var currPage = 1;
 
@@ -10,7 +11,7 @@ function ( $http, TMDB_API, EVT ) {
 		searchMulti: TMDB_API.url + 'search/multi'
 	};
 
-	function req( searchObj ) {
+	function request( searchObj ) {
 
 		if ( currPage > totalPages && totalPages !== -1 ) {
 			// emit event end of page
@@ -20,19 +21,21 @@ function ( $http, TMDB_API, EVT ) {
 
 		$http( {
 			method: 'GET',
+			cache: true,
 			url: url.searchMovie,
 			params:{
 				api_key: TMDB_API.key,
 				query: searchObj.query,
 				page: currPage
 			}
-		} ).success( function ( res ) {
+		} ).then( function ( res ) {
 			// emit event search success
-			searchResult = searchResult.concat( removeNoPosterItems( res.results ) );
-			totalPages = res.total_pages;
+			searchResult = searchResult.concat( removeNoPosterItems( res.data.results ) );
+			totalPages = res.data.total_pages;
 			currPage ++;
-			console.log( res );
-		} ).error( function ( err ) {
+			prevResultLen = searchResult.length;
+			console.log( res, res.data );
+		}, function ( err ) {
 			// emit event search err
 			console.error( err );
 		} );
@@ -51,15 +54,17 @@ function ( $http, TMDB_API, EVT ) {
 
 	function clearSearch() {
 		// emit event clearSeach
-		searchResult = [];
+		searchResult.length = 0;
+		prevResultLen = 0;
 		totalPages = -1;
 		currPage = 1;
 	}
 
 	return {
-		req,
+		request,
 		clearSearch,
-		getRes
+		getRes,
+		prevResultLen
 	};
 
 } ];

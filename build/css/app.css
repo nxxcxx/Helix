@@ -11,18 +11,11 @@ ul, li {
 h1 {
   font-weight: bold; }
 
-.header {
-  background: crimson;
-  height: 80px; }
-
-.tempBorder {
-  height: 280px; }
-
-.tempNoPoster {
-  width: 154px;
-  height: 100px;
-  background: black;
-  color: white; }
+#header {
+  background: rgba(0, 0, 0, 0.5);
+  height: 30px;
+  z-index: 100;
+  width: 100%; }
 
 #canvas-container {
   border: 1px solid black; }

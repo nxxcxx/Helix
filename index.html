@@ -10,13 +10,14 @@
 	</head>
 	<body ng-controller="mainCtrl as main">
 
-		<div id="header" style="position: absolute; z-index: 100;">
+		<div id="header">
 			<form ng-submit="main.search()">
 				<input type="text" placeholder="" ng-model="main.search.query">
 			</form>
 		</div>
 
-		<!-- <div id="canvas-container"></div> -->
+		<ui-view></ui-view>
+
 		<display></display>
 
 		<script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
