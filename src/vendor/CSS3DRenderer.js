@@ -6,10 +6,8 @@
 THREE.CSS3DObject = function ( element ) {
 
 	THREE.Object3D.call( this );
-
 	this.element = element;
 	this.element.style.position = 'absolute';
-	console.log( 1 );
 
 };
 
@@ -30,8 +28,6 @@ THREE.CSS3DSprite = function ( element ) {
 
 THREE.CSS3DSprite.prototype = Object.create( THREE.CSS3DObject.prototype );
 THREE.CSS3DSprite.prototype.constructor = THREE.CSS3DSprite;
-
-//
 
 THREE.CSS3DRenderer = function () {
 

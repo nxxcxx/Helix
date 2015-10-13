@@ -1,5 +1,5 @@
-module.exports = [ '$scope', 'TMDb', 'EVT',
-function ( $scope, TMDb, EVT )  {
+module.exports = [ '$scope', 'TMDb', 'EVT', 'helixWall',
+function ( $scope, TMDb, EVT, helixWall )  {
 
 	var vm = this;
 	vm.search = {
@@ -21,9 +21,14 @@ function ( $scope, TMDb, EVT )  {
 		TMDb.req( vm.search );
 	};
 
+	vm.makeHelixWall = function () {
+		helixWall.makeHelixPosters( vm.movieItems );
+	};
+
 	// DEBUG
 	window.SCOPE = $scope;
 	vm.TMDb = TMDb;
+	vm.helix = helixWall;
 
 	EVT.EOP.listen( function () {
 		console.log( 'recieved EOP event!' );

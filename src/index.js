@@ -5,11 +5,14 @@ angular.module( 'app', [] )
 	url: 'http://api.themoviedb.org/3/'
 } )
 
+.factory( 'util', require( './util.js' ) )
+
 .controller( 'mainCtrl', require( './main.ctrl.js' ) )
-.directive( 'movieItem', require( './mvItem.dir.js' ) )
 .factory( 'TMDb', require( './TMDb.fac.js' ) )
 .factory( 'EVT', require( './events.fac.js' ) )
-;
 
-// webgl
-require( './indexGL.js' );
+.directive( 'display', require( './helix/display.dir.js' ) )
+.factory( 'ENGINE', require( './helix/engine.fac.js' ) )
+.factory( 'helixWall', require( './helix/helixWall.fac.js' ) )
+
+;
