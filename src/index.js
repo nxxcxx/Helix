@@ -13,6 +13,7 @@ angular.module( 'app', [] )
 
 .directive( 'display', require( './helix/display.dir.js' ) )
 .factory( 'ENGINE', require( './helix/engine.fac.js' ) )
-.factory( 'helixWall', require( './helix/helixWall.fac.js' ) )
+.factory( 'helix', require( './helix/helix.fac.js' ) )
+.directive( 'poster', require( './helix/poster.dir.js' ) )
 
 ;

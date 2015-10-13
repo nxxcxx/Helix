@@ -62,11 +62,17 @@ module.exports = [ '$window', function ( $window ) {
 		run();
 	}
 
+	function resetCamera() {
+		$$.camera.position.set( 0, 0, 0 );
+		$$.camera.rotation.set( 0, 0, 0 );
+	}
+
 	return {
 		$$,
 		attachRenderer,
 		onWindowResize,
-		start
+		start,
+		resetCamera,
 	};
 
 } ];

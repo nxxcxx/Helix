@@ -1,5 +1,5 @@
-module.exports = [ '$scope', 'TMDb', 'EVT', 'helixWall',
-function ( $scope, TMDb, EVT, helixWall )  {
+module.exports = [ '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE',
+function ( $scope, TMDb, EVT, helix, ENGINE )  {
 
 	var vm = this;
 	vm.search = {
@@ -7,8 +7,11 @@ function ( $scope, TMDb, EVT, helixWall )  {
 	};
 	vm.movieItems = null;
 
-	$scope.$watch( TMDb.getRes, function ( res ) {
-		vm.movieItems = res;
+	$scope.$watch( TMDb.getRes, function ( movItems, prevMovItems ) {
+
+		vm.movieItems = movItems;
+		helix.makeHelixPosters( movItems.slice( prevMovItems.length ), prevMovItems.length );
+
 	}, true );
 
 	var prevQuery = '';
@@ -17,18 +20,23 @@ function ( $scope, TMDb, EVT, helixWall )  {
 		if ( prevQuery !== vm.search.query ) {
 			TMDb.clearSearch();
 			prevQuery = vm.search.query;
+
+			helix.clearAll();
+			ENGINE.resetCamera();
+
 		}
 		TMDb.req( vm.search );
 	};
 
 	vm.makeHelixWall = function () {
-		helixWall.makeHelixPosters( vm.movieItems );
+		helix.makeHelixPosters( vm.movieItems );
 	};
 
 	// DEBUG
 	window.SCOPE = $scope;
 	vm.TMDb = TMDb;
-	vm.helix = helixWall;
+	vm.helix = helix;
+	vm.ENGINE = ENGINE;
 
 	EVT.EOP.listen( function () {
 		console.log( 'recieved EOP event!' );
