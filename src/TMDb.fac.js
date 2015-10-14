@@ -1,19 +1,38 @@
-module.exports = [ '$http', 'TMDB_API', 'EVT', '$cacheFactory',
-function ( $http, TMDB_API, EVT, $cacheFactory ) {
+module.exports = [ 'log', '$http', 'TMDB_API', 'EVT', '$cacheFactory',
+function ( log, $http, TMDB_API, EVT, $cacheFactory ) {
 
 	var searchResult = [];
 	var prevResultLen = 0;
 	var totalPages = -1;
 	var currPage = 1;
 
-	var url = {
-		searchMovie: TMDB_API.url + 'search/movie',
-		searchMulti: TMDB_API.url + 'search/multi'
-	};
-
 	var movieIdCache = $cacheFactory( 'movieIdCache' );
 
-	function request( searchObj ) {
+	function searchById( id ) {
+
+		var cachedItem = movieIdCache.get( id );
+		if ( cachedItem ) {
+			log.debug( 'info', 'searchById => cache', cachedItem );
+			return cachedItem;
+		}
+
+		var promise = $http( {
+			method: 'GET',
+			url: TMDB_API.url + 'movie/' + id,
+			params: { api_key: TMDB_API.key }
+		} ).then( function ( res ) {
+			log.debug( 'info', 'searchById => API', res.data );
+			movieIdCache.put( res.data.id, res.data );
+			return res.data;
+		}, function ( err ) {
+			log.debug( 'err', err );
+		} );
+
+		return promise;
+
+	}
+
+	function searchByTitle( searchObj ) {
 
 		if ( currPage > totalPages && totalPages !== -1 ) {
 			// emit event end of page
@@ -24,7 +43,7 @@ function ( $http, TMDB_API, EVT, $cacheFactory ) {
 		$http( {
 			method: 'GET',
 			cache: true,
-			url: url.searchMovie,
+			url: TMDB_API.url + 'search/movie',
 			params:{
 				api_key: TMDB_API.key,
 				query: searchObj.query,
@@ -36,7 +55,7 @@ function ( $http, TMDB_API, EVT, $cacheFactory ) {
 			totalPages = res.data.total_pages;
 			currPage ++;
 			prevResultLen = searchResult.length;
-			console.log( res, res.data );
+			log.debug( 'info', res, res.data );
 
 			// cache
 			res.data.results.forEach( function ( item ) {
@@ -48,7 +67,7 @@ function ( $http, TMDB_API, EVT, $cacheFactory ) {
 
 		}, function ( err ) {
 			// emit event search err
-			console.error( err );
+			log.debug( 'err', err );
 		} );
 
 	}
@@ -72,7 +91,8 @@ function ( $http, TMDB_API, EVT, $cacheFactory ) {
 	}
 
 	return {
-		request,
+		searchByTitle,
+		searchById,
 		clearSearch,
 		getRes,
 		prevResultLen

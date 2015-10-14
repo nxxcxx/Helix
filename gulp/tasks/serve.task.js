@@ -19,10 +19,11 @@ module.exports = function () {
 	} );
 
 	gulp.watch( [
-
+		
 		'index.html',
 		'./build/js/*',
-		'./src/**/*.html'
+		'./src/**/*.html',
+		'./template/*'
 
 	], browserSync.reload );
 

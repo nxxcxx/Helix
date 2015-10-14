@@ -1,18 +1,17 @@
-module.exports = [ 'ENGINE', '$compile', '$rootScope', function ( ENGINE, $compile, $rootScope ) {
+module.exports = [ 'log', 'ENGINE', '$compile', '$rootScope',
+function ( log, ENGINE, $compile, $rootScope ) {
 
 	var allPosters = new THREE.Object3D();
 	ENGINE.$$.scene.add( allPosters );
 
 	function makeHelixPosters( posterObjectMulti, offsetStartIdx ) {
 
+		var vector = new THREE.Vector3();
+		var radius = 900;
 		for ( var i = 0; i < posterObjectMulti.length; i++ ) {
 
 			var $isolatedScope = $rootScope.$new( true );
 			$isolatedScope.movieItem = posterObjectMulti[ i ];
-
-			// $isolatedScope.$on( '$destroy', function () {
-			// 	console.log( 'scope destroyed' );
-			// } );
 
 			var posterDirectiveElem = $compile( '<poster></poster>' )( $isolatedScope )[ 0 ];
 			var css3dObj = new THREE.CSS3DObject( posterDirectiveElem );
@@ -22,19 +21,18 @@ module.exports = [ 'ENGINE', '$compile', '$rootScope', function ( ENGINE, $compi
 
 			var hidx = i + offsetStartIdx;
 			var phi = hidx * 0.175 + Math.PI;
-			var rr = 900;
-			css3dObj.position.x = - rr * Math.sin( phi );
+			css3dObj.position.x = - radius * Math.sin( phi );
 			css3dObj.position.y = - ( hidx * 8 ) + 200;
-			css3dObj.position.z = rr * Math.cos( phi );
+			css3dObj.position.z = radius * Math.cos( phi );
 
-			var vector = new THREE.Vector3( -css3dObj.position.x * 2, css3dObj.position.y, -css3dObj.position.z * 2);
+			vector.set( -css3dObj.position.x * 2, css3dObj.position.y, -css3dObj.position.z * 2 );
 
 			css3dObj.lookAt( vector );
 			allPosters.add( css3dObj );
 
 		}
 
-		console.log( 'current:', allPosters.children.length );
+		log.debug( 'info', 'curr posters:', allPosters.children.length );
 
 	}
 

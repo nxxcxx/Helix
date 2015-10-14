@@ -1,5 +1,5 @@
-module.exports = [ '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE',
-function ( $scope, TMDb, EVT, helix, ENGINE ) {
+module.exports = [ 'log', '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE',
+function ( log, $scope, TMDb, EVT, helix, ENGINE ) {
 
 	var vm = this;
 	vm.search = {
@@ -23,11 +23,7 @@ function ( $scope, TMDb, EVT, helix, ENGINE ) {
 			helix.clearAll();
 			ENGINE.resetCamera();
 		}
-		TMDb.request( vm.search );
-	};
-
-	vm.makeHelixWall = function () {
-		helix.makeHelixPosters( vm.movieItems );
+		TMDb.searchByTitle( vm.search );
 	};
 
 	// DEBUG
@@ -37,7 +33,7 @@ function ( $scope, TMDb, EVT, helix, ENGINE ) {
 	vm.ENGINE = ENGINE;
 
 	EVT.EOP.listen( function () {
-		console.log( 'recieved EOP event!' );
+		log.debug( 'info', 'recieved EOP event!' );
 	} );
 
 } ];
