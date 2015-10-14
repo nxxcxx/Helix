@@ -1,5 +1,5 @@
-module.exports = [ '$http', 'TMDB_API', 'EVT',
-function ( $http, TMDB_API, EVT ) {
+module.exports = [ '$http', 'TMDB_API', 'EVT', '$cacheFactory',
+function ( $http, TMDB_API, EVT, $cacheFactory ) {
 
 	var searchResult = [];
 	var prevResultLen = 0;
@@ -10,6 +10,8 @@ function ( $http, TMDB_API, EVT ) {
 		searchMovie: TMDB_API.url + 'search/movie',
 		searchMulti: TMDB_API.url + 'search/multi'
 	};
+
+	var movieIdCache = $cacheFactory( 'movieIdCache' );
 
 	function request( searchObj ) {
 
@@ -35,6 +37,15 @@ function ( $http, TMDB_API, EVT ) {
 			currPage ++;
 			prevResultLen = searchResult.length;
 			console.log( res, res.data );
+
+			// cache
+			res.data.results.forEach( function ( item ) {
+				var cachedItem = movieIdCache.get( item.id );
+				if ( !cachedItem ) {
+					movieIdCache.put( item.id, item );
+				}
+			} );
+
 		}, function ( err ) {
 			// emit event search err
 			console.error( err );

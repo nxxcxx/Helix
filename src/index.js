@@ -11,6 +11,8 @@ angular.module( 'app', [
 .controller( 'mainCtrl', require( './main.ctrl.js' ) )
 .factory( 'TMDb', require( './TMDb.fac.js' ) )
 .factory( 'EVT', require( './events.fac.js' ) )
+.controller( 'movieDetail', require( './movieDetail.ctrl.js' )
+)
 .directive( 'display', require( './helix/display.dir.js' ) )
 .factory( 'ENGINE', require( './helix/engine.fac.js' ) )
 .factory( 'helix', require( './helix/helix.fac.js' ) )
@@ -25,6 +27,12 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 		.state( 'home', {
 			url: '/',
 			templateUrl: './template/home.html'
+		} )
+		.state( 'movieDetail', {
+			url: '/movie/:movieId',
+			templateUrl: './template/movie.html',
+			controller: 'movieDetail',
+			controllerAs: 'md'
 		} )
 	;
 
