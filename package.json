@@ -1,17 +1,32 @@
 {
-	"devDependencies": {
-		"babelify": "^6.1.2",
-		"browser-sync": "^2.7.13",
-		"browserify": "^10.2.4",
-		"gulp": "^3.9.0",
-		"gulp-sourcemaps": "^1.5.2",
-		"gulp-util": "^3.0.6",
-		"lodash.assign": "^3.2.0",
-		"vinyl-buffer": "^1.0.0",
-		"vinyl-source-stream": "^1.1.0",
-		"watchify": "^3.2.3",
-		"gulp-sass": "^2.0.3"
-	},
-	"dependencies": {
-	}
+  "description": "CS3453 term project",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nxxcxx/aucs-webdev-term-project.git"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "browser-sync": "^2.7.13",
+    "browserify": "^10.2.4",
+    "gulp": "^3.9.0",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-util": "^3.0.6",
+    "lodash.assign": "^3.2.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.3",
+    "gulp-sass": "^2.0.3"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.14.1",
+    "chalk": "^1.1.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.1",
+    "jsonwebtoken": "^5.0.4",
+    "mongoose": "^4.1.0",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0"
+  },
+  "license": "MIT"
 }

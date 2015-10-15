@@ -7,6 +7,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory ) {
 	var currPage = 1;
 
 	var movieIdCache = $cacheFactory( 'movieIdCache' );
+	// TMDB_API.url + 'movie/now_playing'
 
 	function searchById( id ) {
 

@@ -37,11 +37,10 @@ function ( log, ENGINE, $compile, $rootScope ) {
 	}
 
 	function clearAll() {
-		for ( var i = 0; i < allPosters.children.length; i++ ) {
-			var poster = allPosters.children[ i ];
+		allPosters.children.forEach( function ( poster ) {
 			poster.disposeElement();
 			poster.scope.$destroy();
-		}
+		} );
 		allPosters.children.length = 0; // clear items
 	}
 
