@@ -12,8 +12,9 @@ h1 {
   font-weight: bold; }
 
 #header {
-  background: rgba(0, 0, 0, 0.5);
+  background: #7e7e7e;
   height: 30px;
+  position: absolute;
   z-index: 100;
   width: 100%; }
 
@@ -33,3 +34,7 @@ canvas {
 .posterElem:hover {
   cursor: pointer;
   border: 2px solid white; }
+
+.movieDetail {
+  background: white;
+  padding-top: 50px; }

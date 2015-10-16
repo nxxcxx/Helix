@@ -4,6 +4,7 @@ var express = require( 'express' );
 var mongoose = require( 'mongoose' );
 var bodyParser = require( 'body-parser' );
 var cors = require( 'cors' );
+var moment = require( 'moment' );
 var chalk = require( 'chalk' );
 
 mongoose.connect( 'mongodb://localhost/TMDb' );
@@ -16,43 +17,12 @@ app.use( bodyParser.json() );
 app.use( cors() );
 
 app.use( function ( req, res, next ) {
-	console.log( req.method, req.url );
+	console.log( req.method, req.url, '\t' + moment().format() );
 	next();
 } );
 
-var Movie = require( './models/movie.js' );
-
-app.get( '/test', function ( req, res ) {
-
-	res.status( 200 ).send( 'OK' );
-
-} );
-
-app.get( '/movie/:id', function ( req, res ) {
-
-	var mid = req.params.id;
-	Movie.find( { id: mid }, function ( err, movie ) {
-
-		if ( err ) return res.status( 500 ).send( 'WTF' );
-		res.status( 200 ).send( movie );
-
-	} );
-
-} );
-
-app.put( '/additem', function ( req, res ) {
-
-	var newMovie = new Movie( req.body );
-	newMovie.save( function ( err ) {
-		if ( err ) return res.status( 500 ).send( 'WTF' );
-		res.status( 200 ).send( newMovie );
-	} );
-
-
-} );
+app.use( require( './TMDb.js' ) );
 
 var server = app.listen( 8001, function () {
-
-	console.log( chalk.cyan( 'Listening on port:', server.address().port ) );
-
+	console.log( chalk.cyan( 'Listening on port:', server.address().port, moment().format() ) );
 } );

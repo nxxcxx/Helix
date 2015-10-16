@@ -1,5 +1,6 @@
 angular.module( 'app', [
-	'ui.router'
+	'ui.router',
+	'ngAnimate'
 ] )
 
 .constant( 'TMDB_API', {
@@ -19,8 +20,8 @@ angular.module( 'app', [
 .factory( 'helix', require( './helix/helix.fac.js' ) )
 .directive( 'poster', require( './helix/poster.dir.js' ) )
 
-.config( [ '$stateProvider', '$urlRouterProvider', '$httpProvider',
-function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
+.config( [ '$stateProvider', '$urlRouterProvider',
+function ( $stateProvider, $urlRouterProvider ) {
 
 	$urlRouterProvider.otherwise( '/' );
 
@@ -43,8 +44,12 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 	;
 
 } ] )
-.config( [ 'logProvider', function ( logProvider ) {
+.config( [ 'logProvider', '$httpProvider', function ( logProvider, $httpProvider ) {
+
 	logProvider.enableDebug();
-	logProvider.enableDebugNamespace( 'info', 'err' );
+	logProvider.enableDebugNamespace( 'info', 'err' ); // ctrl
+
+	$httpProvider.useLegacyPromiseExtensions( false );
+
 } ] )
 ;

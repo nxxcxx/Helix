@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+var mongoose = require( 'mongoose' );
 var Schema = mongoose.Schema;
 
-var movieSchema = new Schema({
+var movieSchema = new Schema( {
 	adult: Boolean,
 	backdrop_path: String,
 	genre_ids: Array,
@@ -16,10 +16,6 @@ var movieSchema = new Schema({
 	video: Boolean,
 	vote_average: Number,
 	vote_count: Number
-});
+} );
 
-// movieSchema.methods.toJSON = function() {
-// 	return this.toObject();
-// };
-
-module.exports = mongoose.model('movie', movieSchema, 'movies');
+module.exports = mongoose.model( 'movie', movieSchema, 'movies' );

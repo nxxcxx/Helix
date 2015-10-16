@@ -9,15 +9,46 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q ) {
 	var movieIdCache = $cacheFactory( 'movieIdCache' );
 	// TMDB_API.url + 'movie/now_playing'
 
+	var DB_ENDPOINT = 'http://localhost:8001/movie/';
+
 	function putItemToDB( movieItem ) {
 		// todo dont put exisiting item in db
-		$http.put( 'http://localhost:8001/additem', movieItem )
+		$http.put( DB_ENDPOINT + movieItem.id, movieItem )
 		.then( function ( res ) {
 			log.debug( 'info', 'PUT:', res );
 		}, function ( err ) {
 			log.debug( 'err', 'PUT:', err );
 		} );
 
+	}
+
+	function searchIdFromDB( id ) {
+		var promise = $http.get( DB_ENDPOINT + id )
+		.then( function ( res ) {
+			log.debug( 'info', 'searchById => DB:', res.data );
+			if ( res.data ) {
+				return res.data;
+			} else {
+				return null;
+			}
+		}, function( err ) {
+			log.debug( 'err', 'searchById => DB:', err );
+		} );
+		return promise;
+	}
+
+	function searchIdFromAPI( id ) {
+		var promise = $http.get( TMDB_API.url + 'movie/' + id, {
+			params: { api_key: TMDB_API.key }
+		} ).then( function ( res ) {
+			log.debug( 'info', 'searchById => API:', res.data );
+			movieIdCache.put( res.data.id, res.data );
+			putItemToDB( res.data );
+			return res.data;
+		}, function ( err ) {
+			log.debug( 'err', 'searchById => API:', err );
+		} );
+		return promise;
 	}
 
 	function searchById( id ) {
@@ -28,50 +59,30 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q ) {
 			return cachedItem;
 		}
 
-		var deferred = $q.defer();
+		var df_DB = $q.defer();
+		var df_Res = $q.defer();
 
-		// try from db
-		$http.get( 'http://localhost:8001/movie/' + id )
-		.then( function ( res ) {
-
-			log.debug( 'info', 'searchById => DB:', res.data );
-
-			if ( res.data.length ) {
-
-				// DB query returned as an array, empty array if not found
-				deferred.resolve( res.data[0] );
-
+		searchIdFromDB( id ).then( function ( res ) {
+			if ( res ) {
+				df_DB.resolve( res );
 			} else {
-
-				$http( {
-
-					method: 'GET',
-					url: TMDB_API.url + 'movie/' + id,
-					params: { api_key: TMDB_API.key }
-
-				} ).then( function ( res ) {
-
-					log.debug( 'info', 'searchById => API:', res.data );
-					movieIdCache.put( res.data.id, res.data );
-					putItemToDB( res.data );
-					deferred.resolve( res.data );
-
-				}, function ( err ) {
-
-					log.debug( 'err', 'searchById => API:', err );
-
-				} );
-
+				df_DB.reject( 'not found' );
 			}
-
-		}, function( err ) {
-
-			log.debug( 'err', 'searchById => DB:', err );
-
+		}, function ( err ) {
+				df_DB.reject( err );
 		} );
 
-		// return promise;
-		return deferred.promise;
+		df_DB.promise.then( function ( res_DB ) {
+			df_Res.resolve( res_DB );
+		}, function ( err ) {
+			searchIdFromAPI( id ).then( function ( res_api ) {
+				df_Res.resolve( res_api );
+			}, function ( err_api ) {
+				df_Res.reject( err_api );
+			} );
+		} );
+
+		return df_Res.promise;
 
 	}
 
@@ -140,7 +151,8 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q ) {
 		searchById,
 		clearSearch,
 		getRes,
-		prevResultLen
+		prevResultLen,
+		putItemToDB
 	};
 
 } ];

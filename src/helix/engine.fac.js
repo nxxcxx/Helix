@@ -6,7 +6,7 @@ module.exports = [ '$window', function ( $window ) {
 		scene: new THREE.Scene(),
 		width: $window.innerWidth,
 		height: $window.innerHeight,
-		camera: new THREE.PerspectiveCamera( 60, this.width / this.height, 10, 100000 ),
+		camera: new THREE.PerspectiveCamera( 70, this.width / this.height, 10, 100000 ),
 		renderer: new THREE.CSS3DRenderer(),
 		screen_ratio: this.width / this.height,
 		pixel_ratio: $window.devicePixelRatio || 1,

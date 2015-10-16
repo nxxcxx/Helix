@@ -1,7 +1,7 @@
-<div style="width: 100%; background: white">
+<div class="movieDetail">
 	id: {{md.movieItem.id}}
 	<br>
-	<h1>{{ md.movieItem.original_title }}</h1>
+	<h1>{{ md.movieItem.fullTitle }}</h1>
 	Release Date: {{ md.movieItem.release_date }}
 	<br>
 	Language: {{ md.movieItem.original_language }}
@@ -11,5 +11,4 @@
 	Synopsis: {{ md.movieItem.overview }}
 	<br>
 	<a ui-sref="home">close</a>
-
 </div>
