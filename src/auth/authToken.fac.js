@@ -1,4 +1,4 @@
-module.exports = [ '$window', function ( $window ) {
+module.exports = [ 'log', '$window', function ( log, $window ) {
 
 	var storage = $window.localStorage;
 	var cachedToken = null;
@@ -18,7 +18,7 @@ module.exports = [ '$window', function ( $window ) {
 	function removeToken() {
 		cachedToken = null;
 		storage.removeItem( 'jwt' );
-		console.log( 'token removed' );
+		log.debug( 'info', 'token removed' );
 	}
 
 	function hasToken() {

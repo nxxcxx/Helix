@@ -1,5 +1,5 @@
-module.exports = [ 'ENDPOINT_URI', '$http', '$q', 'authToken',
-function ( ENDPOINT_URI, $http, $q, authToken ) {
+module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', 'authToken',
+function ( log, ENDPOINT_URI, $http, $q, authToken ) {
 
 		var identity = null;
 		var _identityResolved = false;
@@ -16,20 +16,20 @@ function ( ENDPOINT_URI, $http, $q, authToken ) {
 
 			} else {
 
-				$http.get( ENDPOINT_URI + 'auth' )
+				$http.get( ENDPOINT_URI + 'auth', { attachJwt: true } )
 					.then( function ( res ) {
 
-						console.log( res );
+						log.debug( 'info', res, res.data );
 						identity = res.data;
-						deferred.resolve();
 						_identityResolved = true;
+						deferred.resolve();
 
 					}, function ( err ) {
 
-						console.warn( err );
+						log.debug( 'warn', err, err.data );
 						// todo if jwt expired , deauthorize, remove local storage, redirect
-						deferred.reject( err );
 						_identityResolved = true;
+						deferred.reject( err );
 
 					} );
 
@@ -40,7 +40,6 @@ function ( ENDPOINT_URI, $http, $q, authToken ) {
 		}
 
 		function deauthorize() {
-			// when logout
 			authToken.removeToken();
 			identity = null;
 		}

@@ -1,9 +1,8 @@
 'use strict';
 
 var chalk = require( 'chalk' );
-var express = require( 'express' );
-var router = express.Router();
-var Movie = require( './models/movie.js' );
+var router = require( 'express' ).Router();
+var Movie = require( '../models/movie.js' );
 
 router.route( '/movie/:id' )
 	.get( function ( req, res ) {

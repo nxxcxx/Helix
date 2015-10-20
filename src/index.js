@@ -23,7 +23,7 @@ angular.module( 'app', [
 .controller( 'signupCtrl', require( './auth/signup.ctrl.js' ) )
 .controller( 'signinCtrl', require( './auth/signin.ctrl.js' ) )
 .controller( 'signoutCtrl', require( './auth/signout.ctrl.js' ) )
-.controller( 'privateCtrl', require( './auth/private.ctrl.js' ) )
+.controller( 'collectionCtrl', require( './auth/collection.ctrl.js' ) )
 
 .factory( 'auth', require( './auth/auth.fac.js' ) )
 .factory( 'authToken', require( './auth/authToken.fac.js' ) )
@@ -66,11 +66,11 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 			url: '/signout',
 			controller: 'signoutCtrl'
 		} )
-		.state('private', {
-			url: '/private',
-			templateUrl: './template/private.html',
-			controller: 'privateCtrl',
-			controllerAs: 'private',
+		.state('collection', {
+			url: '/collection',
+			templateUrl: './template/collection.html',
+			controller: 'collectionCtrl',
+			controllerAs: 'coll',
 			resolve: {
 				authorize: [ 'auth', function ( auth ) {
 					return auth.authorize();
@@ -82,16 +82,15 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 	$httpProvider.interceptors.push( 'authInterceptor' );
 
 } ] )
-.run( [ '$rootScope', '$state', 'auth', function ( $rootScope, $state, auth ) {
+.run( [ 'log', '$rootScope', '$state', 'auth', function ( log, $rootScope, $state, auth ) {
 
 	// todo authorize user every beginning of session
-	// or just check if hasToken?
 	auth.authorize( true );
 
 	$rootScope.$on( '$stateChangeError', function ( event, toState, toParams, fromState, fromParams, error ) {
 
 		event.preventDefault(); // prevent transition
-		console.log( error );
+		log.debug( 'warn', error );
 		if ( error ) {
 			$state.go( 'signin' );
 		}
@@ -102,7 +101,7 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 .config( [ 'logProvider', '$httpProvider', function ( logProvider, $httpProvider ) {
 
 	logProvider.enableDebug();
-	logProvider.enableDebugNamespace( 'info', 'err' ); // ctrl
+	logProvider.enableDebugNamespace( 'info', 'err', 'auth' ); // ctrl
 
 	$httpProvider.useLegacyPromiseExtensions( false );
 

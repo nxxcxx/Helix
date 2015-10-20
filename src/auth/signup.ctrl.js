@@ -1,5 +1,5 @@
-module.exports = [ '$scope', '$http', 'ENDPOINT_URI', 'authToken', '$state',
-function ( $scope, $http, ENDPOINT_URI, authToken, $state ) {
+module.exports = [ 'log', '$scope', '$http', 'ENDPOINT_URI', 'authToken', '$state',
+function ( log, $scope, $http, ENDPOINT_URI, authToken, $state ) {
 
 		var vm = this;
 		vm.user = {};
@@ -7,23 +7,23 @@ function ( $scope, $http, ENDPOINT_URI, authToken, $state ) {
 		vm.signup = function () {
 
 			if ( vm.user.email === undefined || vm.user.password === undefined ) {
-				console.log( 'email & password required.' );
+				log.debug( 'warn', 'email & password required.' );
 				return;
 			}
 
-			console.log( 'Registering...' );
+			log.debug( 'warn', 'signing up...' );
 			$http.post( ENDPOINT_URI + 'signup', vm.user )
 				.then( function ( res ) {
 
-					console.log( 'Registered.' );
-					console.log( res );
-					// login
+					log.debug( 'info', 'Registered.' );
+					log.debug( 'info', res );
+
 					authToken.setToken( res.data.token );
 					$state.go( 'private' );
 
 				}, function ( err ) {
 
-					console.warn( err );
+					log.debug( 'warn', err );
 					vm.form.$submitted = false;
 
 				} );

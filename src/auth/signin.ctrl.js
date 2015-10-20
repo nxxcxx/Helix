@@ -1,5 +1,5 @@
-module.exports = [ '$scope', '$http', 'ENDPOINT_URI', 'authToken', '$state',
-function ( $scope, $http, ENDPOINT_URI, authToken, $state )  {
+module.exports = [ 'log', '$scope', '$http', 'ENDPOINT_URI', 'authToken', '$state',
+function ( log, $scope, $http, ENDPOINT_URI, authToken, $state )  {
 
 	var vm = this;
 	vm.user = {
@@ -10,17 +10,17 @@ function ( $scope, $http, ENDPOINT_URI, authToken, $state )  {
 	vm.signin = function() {
 
 		if ( vm.user.email === '' || vm.user.password === '' ) {
-			console.log( 'email & password required.' );
+			log.debug( 'warn', 'email & password required.' );
 			return;
 		}
 
 		$http.post( ENDPOINT_URI + 'signin', vm.user )
 			.then( function( res ) {
-				console.log( res );
+				log.debug( 'info', res, res.data );
 				authToken.setToken( res.data.token );
-				$state.go( 'private' );
+				$state.go( 'collection' );
 			}, function( err, status ) {
-				console.warn( err );
+				log.debug( 'warn', err );
 			} );
 
 	};

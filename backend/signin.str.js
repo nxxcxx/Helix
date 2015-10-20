@@ -3,7 +3,7 @@
 var User = require( './models/user.js' );
 var LocalStrategy = require( 'passport-local' ).Strategy;
 
-var loginStrategy = new LocalStrategy( {
+var signinStrategy = new LocalStrategy( {
 	usernameField: 'email',
 	passwordField: 'password'
 },
@@ -27,4 +27,4 @@ function ( email, password, done ) {
 
 } );
 
-module.exports = loginStrategy;
+module.exports = signinStrategy;

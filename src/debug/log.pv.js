@@ -23,6 +23,8 @@ module.exports = [ function () {
 				console.error.apply( console, slicedArgs );
 			} else if ( debugName === 'info' ) {
 				console.info.apply( console, slicedArgs );
+			} else if ( debugName === 'warn' ) {
+				console.warn.apply( console, slicedArgs );
 			} else if ( debugNamespaces.indexOf( debugName ) !== -1 ) {
 				console.log.apply( console, slicedArgs );
 			}
