@@ -1,5 +1,5 @@
-module.exports = [ 'log', '$http', 'TMDB_API', 'EVT', '$cacheFactory', '$q',
-function ( log, $http, TMDB_API, EVT, $cacheFactory, $q ) {
+module.exports = [ 'log', '$http', 'TMDB_API', 'EVT', '$cacheFactory', '$q', 'ENDPOINT_URI',
+function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 
 	var searchResult = [];
 	var prevResultLen = 0;
@@ -9,7 +9,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q ) {
 	var movieIdCache = $cacheFactory( 'movieIdCache' );
 	// TMDB_API.url + 'movie/now_playing'
 
-	var DB_ENDPOINT = 'http://localhost:8001/movie/';
+	var DB_ENDPOINT = ENDPOINT_URI + 'movie/';
 
 	function putItemToDB( movieItem ) {
 		// todo dont put exisiting item in db

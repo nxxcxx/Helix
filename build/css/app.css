@@ -74,3 +74,8 @@ a:visited {
 
 [ui-view].ng-enter-active {
   opacity: 1; }
+
+#signup, #signin, #private {
+  margin-top: 80px;
+  pointer-events: auto;
+  color: white; }
