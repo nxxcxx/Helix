@@ -10,4 +10,11 @@ function( log, $scope, TMDb, $cacheFactory, movieItem ) {
 		movieItem.fullTitle = movieItem.title + ' (' + movieItem.original_title + ')';
 	}
 
+	if ( movieItem.backdrop_path ) {
+		var imgUrl = 'http://image.tmdb.org/t/p/original' + movieItem.backdrop_path;
+		$( '.backdrop' ).css( {
+			'background-image': 'url(' + imgUrl + ')'
+		} );
+	}
+
 } ];

@@ -3,27 +3,30 @@ body {
   margin: 0px;
   padding: 0px;
   overflow: hidden;
-  background: #0a0a0a; }
+  background: #0a0a0a;
+  font-family: sans-serif; }
 
 ul, li {
   margin: 0px; }
 
 h1 {
-  font-weight: bold; }
+  font-weight: bold;
+  margin-top: 10px; }
+
+a:visited {
+  color: white; }
 
 #header {
-  background: #7e7e7e;
-  height: 30px;
+  background: #1f1f2d;
+  height: 40px;
   position: absolute;
   z-index: 100;
   width: 100%; }
 
 #canvas-container {
-  border: 1px solid black; }
-
-canvas {
-  display: block;
-  vertical-align: top; }
+  position: absolute;
+  top: 0px;
+  left: 0px; }
 
 #stats {
   position: absolute;
@@ -36,5 +39,38 @@ canvas {
   border: 2px solid white; }
 
 .movieDetail {
-  background: white;
-  padding-top: 50px; }
+  color: white;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  pointer-events: none; }
+
+.movie-content {
+  position: absolute;
+  bottom: 0px;
+  padding: 20px 35px;
+  background: rgba(31, 31, 45, 0.95);
+  width: 100%;
+  box-sizing: border-box;
+  pointer-events: auto; }
+
+.backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  pointer-events: auto; }
+
+[ui-view] {
+  position: absolute;
+  z-index: 90;
+  height: 100%;
+  width: 100%;
+  pointer-events: none; }
+
+[ui-view].ng-enter {
+  transition: 0.5s linear all;
+  opacity: 0.1; }
+
+[ui-view].ng-enter-active {
+  opacity: 1; }
