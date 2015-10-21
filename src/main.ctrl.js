@@ -1,7 +1,8 @@
-module.exports = [ 'log', '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE',
-function ( log, $scope, TMDb, EVT, helix, ENGINE ) {
+module.exports = [ 'log', '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE', 'auth',
+function ( log, $scope, TMDb, EVT, helix, ENGINE, auth ) {
 
 	var vm = this;
+	vm.auth = auth;
 	vm.search = {
 		query: '',
 	};

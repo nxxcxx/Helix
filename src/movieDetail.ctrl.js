@@ -17,4 +17,9 @@ function( log, $scope, TMDb, $cacheFactory, movieItem ) {
 		} );
 	}
 
+	vm.addToCollection = function () {
+		console.log( movieItem.id );
+		// prompt up collection modal -> fetch usr's collection -> allow user to select which collection to add to -> save to DB
+	};
+
 } ];

@@ -9,7 +9,6 @@ router
 	.post( '/signup', function ( req, res ) {
 		authenticate( 'signup-strategy', req, res );
 	} )
-
 	.post( '/signin', function ( req, res ) {
 		authenticate( 'signin-strategy', req, res );
 	} )

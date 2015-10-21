@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html ng-app="app">
+
 	<head>
 		<meta charset="utf-8">
-		<title></title>
-
-		<!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" charset="utf-8"> -->
+		<title>Helix</title>
 		<link rel="stylesheet" href="build/css/app.css" charset="utf-8">
 
 	</head>
+
 	<body ng-controller="mainCtrl as main">
 
 		<div id="header">
 			<form ng-submit="main.search()">
 				<input type="text" placeholder="" ng-model="main.search.query">
 			</form>
+			<ul class="inline-list">
+				<li><a ui-sref="home">helix</a></li>
+				<li><a ui-sref="collection" ng-show="main.auth.isAuthenticated()">collection</a></li>
+				<li><a ui-sref="signup" ng-hide="main.auth.isAuthenticated()">sign up</a></li>
+				<li><a ui-sref="signin" ng-hide="main.auth.isAuthenticated()">sign in</a></li>
+				<li><a ui-sref="signout" ng-show="main.auth.isAuthenticated()">sign out</a></li>
+			</ul>
 		</div>
 
 		<div ui-view></div>
 		<display></display>
 
-
+		<!-- js stuffs -->
 		<script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
 		<script src="bower_components/angular/angular.js" charset="utf-8"></script>
 		<script src="bower_components/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
 		<script src="bower_components/angular-animate/angular-animate.js" charset="utf-8"></script>
-		<!-- <script src="bower_components/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script> -->
 
 		<script src="src/vendor/three.js" charset="utf-8"></script>
 		<script src="src/vendor/CSS3DRenderer.js" charset="utf-8"></script>
@@ -34,4 +40,5 @@
 		<script src="build/js/app.js" charset="utf-8"></script>
 
 	</body>
+
 </html>

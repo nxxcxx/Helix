@@ -19,7 +19,7 @@ function ( log, $scope, $http, ENDPOINT_URI, authToken, $state ) {
 					log.debug( 'info', res );
 
 					authToken.setToken( res.data.token );
-					$state.go( 'private' );
+					$state.go( 'collection' );
 
 				}, function ( err ) {
 
