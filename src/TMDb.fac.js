@@ -12,14 +12,13 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 	var DB_ENDPOINT = ENDPOINT_URI + 'movie/';
 
 	function putItemToDB( movieItem ) {
-		// todo dont put exisiting item in db
+		// todo dont put exisiting item in db ( UPSERT )
 		$http.put( DB_ENDPOINT + movieItem.id, movieItem )
 		.then( function ( res ) {
 			log.debug( 'info', 'PUT:', res );
 		}, function ( err ) {
 			log.debug( 'err', 'PUT:', err );
 		} );
-
 	}
 
 	function searchIdFromDB( id ) {
@@ -109,7 +108,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 			totalPages = res.data.total_pages;
 			currPage ++;
 			prevResultLen = searchResult.length;
-			log.debug( 'info', res, res.data );
+			log.debug( 'info', 'searchByTitle:', res, res.data );
 
 			// cache
 			res.data.results.forEach( function ( item ) {
@@ -123,7 +122,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 
 		}, function ( err ) {
 			// emit event search err
-			log.debug( 'err', err );
+			log.debug( 'searchByTitle:', err );
 		} );
 
 	}

@@ -2,8 +2,8 @@
 
 var jwt = require( 'jsonwebtoken' );
 var passport = require( 'passport' );
-var PRIVATE_KEY = require( 'fs' ).readFileSync( __dirname + '/../private.key' );
 var router = require( 'express' ).Router();
+var PRIVATE_KEY = require( 'fs' ).readFileSync( __dirname + '/../private.key' );
 
 router
 	.post( '/signup', function ( req, res ) {
@@ -27,6 +27,7 @@ router
 		jwt.verify( token, PRIVATE_KEY, function ( err, payload ) {
 
 			if ( err ) return res.status( 401 ).send( err );
+			// console.log( payload );
 			res.status( 200 ).send( payload );
 
 		} );
@@ -54,7 +55,7 @@ function authenticate( strategy, req, res ) {
 function generateToken( user ) {
 
 	var payload = {
-		sub: user.id
+		userId: user.id
 	};
 
 	var token = jwt.sign( payload, PRIVATE_KEY, {

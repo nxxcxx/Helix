@@ -16,11 +16,11 @@ function ( log, $scope, $http, ENDPOINT_URI, authToken, $state )  {
 
 		$http.post( ENDPOINT_URI + 'signin', vm.user )
 			.then( function( res ) {
-				log.debug( 'info', res, res.data );
+				log.debug( 'info', 'signin', res, res.data );
 				authToken.setToken( res.data.token );
 				$state.go( 'collection' );
 			}, function( err, status ) {
-				log.debug( 'warn', err );
+				log.debug( 'warn', 'signin', err );
 			} );
 
 	};

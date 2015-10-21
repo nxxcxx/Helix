@@ -29,6 +29,8 @@ angular.module( 'app', [
 .factory( 'authToken', require( './auth/authToken.fac.js' ) )
 .factory( 'authInterceptor', require( './auth/authInterceptor.fac.js' ) )
 
+.factory( 'movieCollection', require( './movieCollection.fac.js' ) )
+
 .config( [ '$stateProvider', '$urlRouterProvider', '$httpProvider',
 function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 
@@ -74,6 +76,9 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 			resolve: {
 				authorize: [ 'auth', function ( auth ) {
 					return auth.authorize();
+				} ],
+				resolvedCollection: [ 'movieCollection', function ( movieCollection ) {
+					return movieCollection.resolveCollection();
 				} ]
 			}
 		})
@@ -85,6 +90,7 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 .run( [ 'log', '$rootScope', '$state', 'auth', function ( log, $rootScope, $state, auth ) {
 
 	// todo authorize user every beginning of session
+	// todo dont autorize twice
 	auth.authorize( true );
 
 	$rootScope.$on( '$stateChangeError', function ( event, toState, toParams, fromState, fromParams, error ) {

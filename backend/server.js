@@ -28,6 +28,7 @@ app.use( function ( req, res, next ) {
 
 app.use( require( './route/TMDb.route.js' ) );
 app.use( require( './route/auth.route.js' ) );
+app.use( require( './route/collection.route.js' ) );
 
 
 var server = app.listen( 8001, function () {

@@ -2,7 +2,7 @@ module.exports = [ 'authToken', function ( authToken ) {
 
 	function request( config ) {
 
-		if ( config.attachJwt ) {
+		if ( config.requireAuth ) {
 			var token = authToken.getToken();
 			if ( token ) {
 				// http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html   section 2.1

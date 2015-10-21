@@ -1,5 +1,6 @@
-module.exports = [ '$scope', 'auth', function ( $scope, auth )  {
+module.exports = [ '$scope', 'auth', 'movieCollection', function ( $scope, auth, movieCollection )  {
 
-	console.log( 1 );
+	window.movieCollection = movieCollection;
+	console.log( movieCollection.getCollection() );
 
 } ];
