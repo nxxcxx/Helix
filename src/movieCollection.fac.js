@@ -7,6 +7,11 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 		// collection needs to be resolved first
 		// todo check if collection is alredy exists
 		collection.push( { collectionName: name, movies: [] } );
+		put();
+	}
+
+	function isEmpty() {
+		return collection.length === 0;
 	}
 
 	function resolveCollection() {
@@ -26,7 +31,7 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 					}
 					deferred.resolve( true );
 				}, function ( err ) {
-					log.debug( 'err', 'collection.resolveCollection():', err );
+					log.debug( 'warn', 'collection.resolveCollection():', err );
 					deferred.reject( err );
 				} );
 		}
@@ -35,18 +40,17 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 
 	}
 
-	function get() {
-		// $http.get( DB_ENDPOINT, { requireAuth: true } )
-		// 	.then( function ( res ) {
-		// 		log.debug( 'info', 'collection.get():', res );
-		// 		if ( res.data ) {
-		// 			collection = res.data;
-		// 		} else {
-		// 			collection = [];
-		// 		}
-		// 	}, function ( err ) {
-		// 		log.debug( 'err', 'collection.get():', err );
-		// 	} );
+	function hasItem( itemId, someCollection ) {
+		for ( var i = 0; i < collection.length; i ++ ) {
+			if ( collection[i].collectionName === someCollection ) {
+				for ( var k = 0; k < collection[i].movies.length; k ++ ) {
+					if ( collection[i].movies[k] === itemId ) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	function put() {
@@ -62,20 +66,40 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 	update local collection
 	*/
 	function push( itemId, toCollection ) {
+		if ( hasItem( itemId, toCollection ) ) {
+			return false;
+		}
 		for ( var i = 0; i < collection.length; i ++ ) {
 			if ( collection[i].collectionName === toCollection ) {
 				collection[i].movies.push( itemId );
+				put();
 				return true;
 			}
 		}
 		return false;
 	}
 
-	function remove( itemId, fromCollection ) {
+	function remove( itemId, inCollection ) {
 		for ( var i = 0; i < collection.length; i ++ ) {
-			if ( collection[i] === fromCollection ) {
-				collection.splice( i, 1 );
-				return true;
+			if ( collection[i].collectionName === inCollection ) {
+				for ( var k = 0; k < collection[i].movies.length; k ++ ) {
+					if ( collection[i].movies[k] === itemId ) {
+						var removed = collection[i].movies.splice( k, 1 ).length;
+						put();
+						return removed !== 0;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	function removeCollection( collectionName ) {
+		for ( var i = 0; i < collection.length; i ++ ) {
+			if ( collection[i].collectionName === collectionName ) {
+				var removed = collection.splice( i, 1 ).length;
+				put();
+				return removed !== 0;
 			}
 		}
 		return false;
@@ -91,19 +115,21 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 
 	function _clear() {
 		collection = null;
-		log.debug( 'info', 'collection cleared.' );
+		log.debug( 'info', 'local collection cleared.' );
 	}
 
 	return {
 		getCollection,
 		create,
-		get,
 		push,
 		put,
 		remove,
+		removeCollection,
 		sync,
 		_clear,
-		resolveCollection
+		resolveCollection,
+		hasItem,
+		isEmpty
 	};
 
 } ];

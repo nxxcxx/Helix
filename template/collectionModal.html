@@ -1,0 +1,30 @@
+<div class="collection-modal">
+
+	<h1> COLLECTION MODAL </h1>
+
+	{{ modal.collectionModalService.getActiveItem().title }}
+	<br>
+	<ul>
+		<li ng-repeat="collection in modal.movieCollection.getCollection()">
+			<div>
+				{{ collection.collectionName }}
+				<button type="button" ng-click="modal.addToCollection( modal.collectionModalService.getActiveItem().id, collection.collectionName )"> + </button>
+			</div>
+		</li>
+	</ul>
+
+	<button ng-click="modal.openEditor()">+ NEW COLLECTION</button>
+
+	<button ng-click="modal.collectionModalService.close()">X</button>
+
+	<div ng-show="modal.addingNewCollection" style="background: blue">
+		new collection sub page
+		<br>
+		<input type="text" value="" ng-model="newCollectionName">
+		{{ newCollectionName }}
+		<br>
+		<button type="button" ng-click="modal.createNewCollection()">Create</button>
+		<button type="button" ng-click="modal.closeEditor()">Close</button>
+	</div>
+
+</div>

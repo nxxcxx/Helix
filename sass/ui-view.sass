@@ -1,0 +1,14 @@
+@import 'mixins'
+
+[ui-view]
+	+full-width-height
+	position: absolute
+	z-index: 90
+	pointer-events: none
+
+[ui-view].ng-enter
+	transition: 0.5s linear all
+	opacity: 0.1
+
+[ui-view].ng-enter-active
+	opacity: 1

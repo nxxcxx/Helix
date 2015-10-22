@@ -1,0 +1,42 @@
+@import 'mixins'
+
+body
+	height: 100%
+	margin: 0px
+	padding: 0px
+	background: rgb(20, 20, 20)
+	font-family: sans-serif
+	overflow: hidden
+
+ul
+	list-style: none;
+
+ul, li
+	margin: 0px
+	padding: 0px
+
+h1
+	font-weight: bold
+	margin-top: 10px
+
+input
+	padding: 0px
+	border: 0px
+	border: none
+	box-sizing: border-box
+	border-radius: 3px
+
+a:visited
+	color: white
+
+
+.inline-list li
+	display: inline-block
+
+#canvas-container
+	position: absolute
+
+#stats
+	user-select: none
+	+fixed-pos( $bottom: -33px, $right: 0px )
+	z-index: 9999

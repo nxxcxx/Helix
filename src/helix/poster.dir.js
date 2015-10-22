@@ -1,9 +1,8 @@
-module.exports = [ '$state', function ( $state ) {
+module.exports = [ '$state', 'collectionModalService', function ( $state, collectionModalService ) {
 
 	function ctrl( $scope, $element ) {
 
 		// $scope.movieItem obj is passed thru isolatedScope via compiled directive in helix.fac.js
-
 		var img = new Image();
 		var imgUrl = 'http://image.tmdb.org/t/p/w154/' + $scope.movieItem.poster_path;
 		img.onload = function () {
@@ -24,6 +23,7 @@ module.exports = [ '$state', function ( $state ) {
 
 		$element.on( 'click', function ( evt ) {
 			$state.go( 'movieDetail', { movieId: $scope.movieItem.id } );
+			collectionModalService.setActiveItem( $scope.movieItem );
 		} );
 
 	}

@@ -1,0 +1,38 @@
+@import 'mixins'
+@import 'color'
+
+#signup, #signin, #collection
+	pointer-events: auto
+	color: $w1
+
+#signin, #signup
+	+fixed-pos
+	+full-width-height
+	background: url('../../img/bg-blur.png') no-repeat
+	background-size: cover
+	background-position: center
+
+.sign-container
+	+absolute-center
+	+size( 600px, 400px )
+	background: #1e1e20
+	border-radius: 8px
+	box-sizing: border-box
+	text-align: center
+
+.sign-body
+	+absolute-center
+
+.sign-input
+	+size( 400px, 35px )
+	position: relative
+	margin-bottom: 20px
+
+	& input
+		+full-width-height
+		padding-left: 30px
+
+.sign-input-icon
+	+absolute-pos( $top: 5px, $left: 6px )
+	color: $dark-grey
+	font-size: 23px

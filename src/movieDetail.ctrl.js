@@ -1,5 +1,5 @@
-module.exports = [ 'log', '$scope', 'TMDb', '$cacheFactory', 'movieItem',
-function( log, $scope, TMDb, $cacheFactory, movieItem ) {
+module.exports = [ 'log', '$scope', 'TMDb', '$cacheFactory', 'movieItem', 'collectionModalService',
+function( log, $scope, TMDb, $cacheFactory, movieItem, collectionModalService ) {
 
 	var vm = this;
 	vm.movieItem = movieItem; // movieItem injected via state resolve
@@ -17,9 +17,9 @@ function( log, $scope, TMDb, $cacheFactory, movieItem ) {
 		} );
 	}
 
-	vm.addToCollection = function () {
-		console.log( movieItem.id );
-		// prompt up collection modal -> fetch usr's collection -> allow user to select which collection to add to -> save to DB
+	vm.openCollectionModal = function () {
+		collectionModalService.setActiveItem( movieItem );
+		collectionModalService.open();
 	};
 
 } ];

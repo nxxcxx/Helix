@@ -1,3 +1,23 @@
 <div id="collection">
 	<h1> COLLECTIONS </h1>
+
+	<ul>
+		<span ng-if="mc.movieCollection.isEmpty()">Collection is empty...</span>
+		<li ng-repeat="collection in mc.movieCollection.getCollection()">
+
+			{{ collection.collectionName }}
+			<button type="button" ng-click="mc.movieCollection.removeCollection( collection.collectionName )">X</button>
+
+			<ul>
+				<li ng-repeat="movieId in collection.movies">
+					{{ movieId }}
+					<button type="button" ng-click="mc.movieCollection.remove( movieId, collection.collectionName )">X</button>
+				</li>
+			</ul>
+
+			<br>
+
+		</li>
+	</ul>
+
 </div>

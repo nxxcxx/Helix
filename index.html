@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Helix</title>
+		<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" charset="utf-8">
 		<link rel="stylesheet" href="build/css/app.css" charset="utf-8">
 
 	</head>
@@ -11,18 +12,21 @@
 	<body ng-controller="mainCtrl as main">
 
 		<div id="header">
-			<form ng-submit="main.search()">
-				<input type="text" placeholder="" ng-model="main.search.query">
+			<a ui-sref="home"><h1 class="logo">H</h1></a>
+			<form class="search-input" ng-submit="main.search()" >
+				<i class="fa fa-search search-input-icon"></i>
+				<input type="text" placeholder="Search" ng-model="main.search.query">
 			</form>
-			<ul class="inline-list">
-				<li><a ui-sref="home">helix</a></li>
-				<li><a ui-sref="collection" ng-show="main.auth.isAuthenticated()">collection</a></li>
-				<li><a ui-sref="signup" ng-hide="main.auth.isAuthenticated()">sign up</a></li>
-				<li><a ui-sref="signin" ng-hide="main.auth.isAuthenticated()">sign in</a></li>
-				<li><a ui-sref="signout" ng-show="main.auth.isAuthenticated()">sign out</a></li>
+
+			<ul class="inline-list nav-icons">
+				<li><a ui-sref="collection" ng-show="main.auth.isAuthenticated()"><i class="fa fa-list"></i></a></li>
+				<li><a ui-sref="signup" ng-hide="main.auth.isAuthenticated()"><i class="fa fa-users"></i></a></li>
+				<li><a ui-sref="signin" ng-hide="main.auth.isAuthenticated()"><i class="fa fa-sign-in"></i></a></li>
+				<li><a ui-sref="signout" ng-show="main.auth.isAuthenticated()"><i class="fa fa-sign-out"></i></a></li>
 			</ul>
 		</div>
 
+		<collection-modal></collection-modal>
 		<div ui-view></div>
 		<display></display>
 

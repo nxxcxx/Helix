@@ -23,13 +23,15 @@ angular.module( 'app', [
 .controller( 'signupCtrl', require( './auth/signup.ctrl.js' ) )
 .controller( 'signinCtrl', require( './auth/signin.ctrl.js' ) )
 .controller( 'signoutCtrl', require( './auth/signout.ctrl.js' ) )
-.controller( 'collectionCtrl', require( './auth/collection.ctrl.js' ) )
 
 .factory( 'auth', require( './auth/auth.fac.js' ) )
 .factory( 'authToken', require( './auth/authToken.fac.js' ) )
 .factory( 'authInterceptor', require( './auth/authInterceptor.fac.js' ) )
 
+.controller( 'movieCollectionCtrl', require( './auth/movieCollection.ctrl.js' ) )
 .factory( 'movieCollection', require( './movieCollection.fac.js' ) )
+.directive( 'collectionModal', require( './collectionModal.dir.js' ) )
+.factory( 'collectionModalService', require( './collectionModalService.fac.js' ) )
 
 .config( [ '$stateProvider', '$urlRouterProvider', '$httpProvider',
 function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
@@ -71,8 +73,8 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 		.state('collection', {
 			url: '/collection',
 			templateUrl: './template/collection.html',
-			controller: 'collectionCtrl',
-			controllerAs: 'coll',
+			controller: 'movieCollectionCtrl',
+			controllerAs: 'mc',
 			resolve: {
 				authorize: [ 'auth', function ( auth ) {
 					return auth.authorize();
@@ -87,11 +89,13 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 	$httpProvider.interceptors.push( 'authInterceptor' );
 
 } ] )
-.run( [ 'log', '$rootScope', '$state', 'auth', function ( log, $rootScope, $state, auth ) {
+.run( [ 'log', '$rootScope', '$state', 'auth', 'movieCollection', function ( log, $rootScope, $state, auth, movieCollection ) {
 
 	// todo authorize user every beginning of session
 	// todo dont autorize twice
 	auth.authorize( true );
+
+	movieCollection.resolveCollection();
 
 	$rootScope.$on( '$stateChangeError', function ( event, toState, toParams, fromState, fromParams, error ) {
 

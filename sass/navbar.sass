@@ -1,0 +1,36 @@
+@import 'color'
+
+#header
+	+absolute-pos
+	+size( 100%, 45px )
+	background: $dark-grey
+	z-index: 100
+	color: white
+
+.logo
+	+absolute-pos( $top: 5px, $left: 13px )
+	margin: 0px
+
+.search-input
+	+size( 250px, 30px )
+	+absolute-pos( $top: 7px, $left: 50px )
+
+	& input
+		+full-width-height
+		padding-left: 30px
+
+.search-input-icon
+	+absolute-pos( $top: 5px, $left: 5px )
+	color: $dark-grey
+	font-size: 20px
+
+.nav-icons
+	+absolute-pos( $top: 8px, $right: 10px )
+	font-size: 23px
+
+	i
+		width: 28px
+		color: white
+
+	i:hover
+		color: rgb(200, 200, 200)

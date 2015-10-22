@@ -4,8 +4,8 @@ module.exports = [ '$window', function ( $window ) {
 		canvas: null,
 		stats: new Stats(),
 		scene: new THREE.Scene(),
-		width: $window.innerWidth,
-		height: $window.innerHeight,
+		width: $(window).width(),
+		height: $(window).height(),
 		camera: new THREE.PerspectiveCamera( 70, this.width / this.height, 10, 100000 ),
 		renderer: new THREE.CSS3DRenderer(),
 		screen_ratio: this.width / this.height,
@@ -24,8 +24,8 @@ module.exports = [ '$window', function ( $window ) {
 	}
 
 	function onWindowResize() {
-		$$.width = $window.innerWidth;
-		$$.height = $window.innerHeight;
+		$$.width = $(window).width();
+		$$.height = $(window).height();
 		$$.pixel_ratio = $window.devicePixelRatio || 1;
 		$$.screen_ratio = $$.width / $$.height;
 		$$.camera.aspect = $$.screen_ratio;

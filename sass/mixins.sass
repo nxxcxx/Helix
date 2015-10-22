@@ -1,0 +1,27 @@
+=size( $w: null, $h: null )
+	width: $w
+	height: $h
+
+=absolute-pos( $top: null, $right: null, $bottom: null, $left: null )
+	position: absolute
+	top: $top
+	right: $right
+	bottom: $bottom
+	left: $left
+
+=fixed-pos( $top: null, $right: null, $bottom: null, $left: null )
+	position: fixed
+	top: $top
+	right: $right
+	bottom: $bottom
+	left: $left
+
+=absolute-center
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate( -50%, -50% )
+
+=full-width-height
+	width: 100%
+	height: 100%

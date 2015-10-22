@@ -1,89 +1,9 @@
-body
-	height: 100%
-	margin: 0px
-	padding: 0px
-	overflow: hidden
-	background: rgb( 10, 10, 10 )
-	font-family: sans-serif
-
-ul
-	list-style: none;
-
-ul, li
-	margin: 0px
-
-h1
-	font-weight: bold
-	margin-top: 10px
-
-a:visited
-	color: white
-
-#header
-	background: rgb(31, 31, 45)
-	height: 40px
-	position: absolute
-	z-index: 100
-	width: 100%
-
-.inline-list li
-	display: inline-block
-
-#canvas-container
-	position: absolute
-	top: 0px
-	left: 0px
-
-#stats
-	position: absolute
-	right: -10px
-	bottom: -34px
-	-webkit-user-select: none
-
-.posterElem:hover
-	cursor: pointer
-	border: 2px solid white
-
-.movieDetail
-	color: white
-	height: 100%
-	width: 100%
-	position: relative
-	pointer-events: none
-
-.movie-content
-	position: absolute
-	bottom: 0px
-	padding: 20px 35px
-	background: rgba(31, 31, 45, 0.95)
-	width: 100%
-	box-sizing: border-box
-	// height: 300px
-	pointer-events: auto
-
-
-.backdrop
-	position: absolute
-	width: 100%
-	height: 100%
-	background-size: cover
-	pointer-events: auto
-
-[ui-view]
-	position: absolute
-	z-index: 90
-	height: 100%
-	width: 100%
-	pointer-events: none
-
-[ui-view].ng-enter
-	transition: 0.5s linear all
-	opacity: 0.1
-
-[ui-view].ng-enter-active
-	opacity: 1
-
-#signup, #signin, #collection
-	margin-top: 80px
-	pointer-events: auto
-	color: white
+@import 'color'
+@import 'all'
+@import 'signForm'
+@import 'navbar'
+@import 'button'
+@import 'ui-view'
+@import 'mixins'
+@import 'movieDetail'
+@import 'poster'

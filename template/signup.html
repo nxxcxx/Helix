@@ -1,36 +1,27 @@
 <div id="signup">
+	<div class="sign-container">
+		<div class="sign-body">
+			<h1>HELIX</h1>
+			<form name="signup.form" ng-submit="signup.signup()" novalidate>
 
-	<h1> SIGN UP </h1>
+				<div class="sign-input">
+					<i class="fa fa-user sign-input-icon"></i>
+					<input placeholder="Email" type="email" ng-model="signup.user.email" required>
+				</div>
 
-	<form
-		name="signup.form"
-		ng-submit="signup.signup()"
-		novalidate>
+				<div class="sign-input">
+					<i class="fa fa-lock sign-input-icon"></i>
+					<input placeholder="Password" type="password" ng-model="signup.user.password" required>
+				</div>
 
-		<input
-			placeholder="Email"
-			type="email"
-			name="email"
-			ng-model="signup.user.email"
-			required>
+				<div class="sign-input">
+					<i class="fa fa-lock sign-input-icon"></i>
+					<input placeholder="Confirm password" type="password" ng-model="signup.user.confirmPassword" required>
+				</div>
 
-		<input
-			type="password"
-			placeholder="Password"
-			ng-model="signup.user.password"
-			required>
+				<button class="block-btn btn-navy" type="submit" ng-disabled="signup.form.$invalid || signup.form.$submitted">Sign up</button>
 
-		<input
-			type="password"
-			placeholder="Confirm password"
-			ng-model="signup.user.confirmPassword"
-			required>
-
-		<button type="submit"
-			ng-disabled="signup.form.$invalid || signup.form.$submitted">Sign up</button>
-
-	</form>
-
-	<pre>{{ signup | json }}</pre>
-
+			</form>
+		</div>
+	</div>
 </div>

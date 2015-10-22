@@ -1,10 +1,21 @@
 <div id="signin">
-	<h1>SIGN IN</h1>
-	<form >
-		<label class="col-sm-1 control-label">Email</label>
-		<input class="form-control" placeholder="Email" ng-model="signin.user.email">
-		<label class="col-sm-1 control-label">Password</label>
-		<input class="form-control" placeholder="Password" ng-model="signin.user.password">
-		<button type="submit" class="btn btn-default" ng-click="signin.signin()">Sign in</button>
-	</form>
+	<div class="sign-container">
+		<div class="sign-body">
+			<h1>HELIX</h1>
+			<form>
+
+				<div class="sign-input">
+					<i class="fa fa-user sign-input-icon"></i>
+					<input placeholder="Email" ng-model="signin.user.email">
+				</div>
+
+				<div class="sign-input">
+					<i class="fa fa-lock sign-input-icon"></i>
+					<input placeholder="Password" type="password" ng-model="signin.user.password">
+				</div>
+
+				<button class="block-btn btn-navy" type="submit" ng-click="signin.signin()">Sign in</button>
+			</form>
+		</div>
+	</div>
 </div>
