@@ -11,12 +11,11 @@ function ( log, $scope, $http, ENDPOINT_URI, authToken, $state ) {
 				return;
 			}
 
-			log.debug( 'warn', 'signing up...' );
+			log.debug( 'info', 'signing up...' );
 			$http.post( ENDPOINT_URI + 'signup', vm.user )
 				.then( function ( res ) {
 
-					log.debug( 'info', 'Registered.' );
-					log.debug( 'info', res );
+					log.debug( 'info', 'Registered.', res );
 
 					authToken.setToken( res.data.token );
 					$state.go( 'collection' );

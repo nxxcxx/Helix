@@ -167,12 +167,11 @@ a:visited {
   color: #ffffff;
   height: 100%;
   width: 100%;
-  position: relative;
   pointer-events: none; }
 
 .movie-content {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   padding: 20px 35px;
   background: #1e1e20;
   width: 100%;
@@ -184,6 +183,7 @@ a:visited {
   width: 100%;
   height: 100%;
   background-size: cover;
+  background-position: center;
   pointer-events: auto; }
 
 .collection-modal {
@@ -200,3 +200,11 @@ a:visited {
 .posterElem:hover {
   cursor: pointer;
   border: 2px solid #ffffff; }
+
+.movie-collection-container {
+  width: 200px;
+  height: 250px;
+  background: crimson;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 10px; }
