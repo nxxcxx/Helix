@@ -26,6 +26,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 		.then( function ( res ) {
 			log.debug( 'info', 'searchById => DB:', res.data );
 			if ( res.data ) {
+				movieIdCache.put( res.data.id, res.data );
 				return res.data;
 			} else {
 				return null;
@@ -52,14 +53,15 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 
 	function searchById( id ) {
 
+		var df_DB = $q.defer();
+		var df_Res = $q.defer();
+
 		var cachedItem = movieIdCache.get( id );
 		if ( cachedItem ) {
 			log.debug( 'info', 'searchById => cache:', cachedItem );
-			return cachedItem;
+			df_Res.resolve( cachedItem );
+			return df_Res.promise;
 		}
-
-		var df_DB = $q.defer();
-		var df_Res = $q.defer();
 
 		searchIdFromDB( id ).then( function ( res ) {
 			if ( res ) {
@@ -114,8 +116,9 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 			res.data.results.forEach( function ( item ) {
 
 				if ( !movieIdCache.get( item.id ) ) {
+					console.log( item.id, item );
 					movieIdCache.put( item.id, item );
-					// putItemToDB( item ); // todo check if already exits in DB
+					// putItemToDB( item );
 				}
 
 			} );
@@ -151,7 +154,8 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 		clearSearch,
 		getRes,
 		prevResultLen,
-		putItemToDB
+		putItemToDB,
+		movieIdCache
 	};
 
 } ];

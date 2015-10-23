@@ -2,20 +2,6 @@
 	width: $w
 	height: $h
 
-=absolute-pos( $top: null, $right: null, $bottom: null, $left: null )
-	position: absolute
-	top: $top
-	right: $right
-	bottom: $bottom
-	left: $left
-
-=fixed-pos( $top: null, $right: null, $bottom: null, $left: null )
-	position: fixed
-	top: $top
-	right: $right
-	bottom: $bottom
-	left: $left
-
 =absolute-center
 	position: absolute
 	top: 50%
@@ -25,3 +11,40 @@
 =full-width-height
 	width: 100%
 	height: 100%
+
+@function is-valid-length($value)
+	@return ( type-of($value) == 'number' and not unitless($value) ) or ( index(auto initial inherit 0, $value) != null )
+
+=position($position, $args: ())
+	$offsets: top right bottom left
+	position: $position
+	@each $offset in $offsets
+		$index: index($args, $offset)
+		// If offset is found in the list
+		@if $index
+			// If it is found at last position
+			@if $index == length($args)
+				#{$offset}: 0
+			// If it is followed by a value
+			@else
+				$next: nth($args, $index + 1)
+				// If the next value is value length
+				@if is-valid-length($next)
+					#{$offset}: $next
+				// If the next value is another offset
+				@else if index($offsets, $next)
+					#{$offset}: 0
+				// If it is invalid
+				@else
+					@warn "Invalid value `#{$next}` for offset `#{$offset}`."
+
+=pos-abs($args: ())
+	+position(absolute, $args)
+
+
+=pos-fix($args: ())
+	+position(fixed, $args)
+
+
+=pos-rel($args: ())
+	+position(relative, $args)

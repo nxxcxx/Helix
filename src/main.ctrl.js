@@ -1,5 +1,5 @@
-module.exports = [ 'log', '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE', 'auth',
-function ( log, $scope, TMDb, EVT, helix, ENGINE, auth ) {
+module.exports = [ 'log', '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE', 'auth', '$state',
+function ( log, $scope, TMDb, EVT, helix, ENGINE, auth, $state ) {
 
 	var vm = this;
 	vm.auth = auth;
@@ -24,6 +24,9 @@ function ( log, $scope, TMDb, EVT, helix, ENGINE, auth ) {
 			helix.clearAll();
 			ENGINE.resetCamera();
 		}
+		if ( $state.current.name !== 'helix' ) {
+			$state.go( 'helix' );
+		}
 		TMDb.searchByTitle( vm.search );
 	};
 
@@ -32,6 +35,7 @@ function ( log, $scope, TMDb, EVT, helix, ENGINE, auth ) {
 	vm.TMDb = TMDb;
 	vm.helix = helix;
 	vm.ENGINE = ENGINE;
+	vm.STATE = $state;
 
 	EVT.EOP.listen( function () {
 		log.debug( 'info', 'recieved EOP event!' );

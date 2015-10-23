@@ -11,6 +11,7 @@
 			<ul>
 				<li ng-repeat="movieId in collection.movies">
 					{{ movieId }}
+					<collection-item movie-id="{{movieId}}"></collection-item>
 					<button type="button" ng-click="mc.movieCollection.remove( movieId, collection.collectionName )">X</button>
 				</li>
 			</ul>

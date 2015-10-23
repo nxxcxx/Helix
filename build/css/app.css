@@ -52,12 +52,16 @@ a:visited {
   background-size: cover;
   background-position: center; }
 
+.sign-logo {
+  margin-bottom: 40px;
+  font-size: 50px; }
+
 .sign-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
+  width: 550px;
   height: 400px;
   background: #1e1e20;
   border-radius: 8px;
@@ -93,7 +97,7 @@ a:visited {
   height: 45px;
   background: #1e1e20;
   z-index: 100;
-  color: white; }
+  color: #ffffff; }
 
 .logo {
   position: absolute;
@@ -126,7 +130,7 @@ a:visited {
   font-size: 23px; }
   .nav-icons i {
     width: 28px;
-    color: white; }
+    color: #ffffff; }
   .nav-icons i:hover {
     color: #c8c8c8; }
 
@@ -170,15 +174,15 @@ a:visited {
   position: absolute;
   bottom: 0px;
   padding: 20px 35px;
-  background: rgba(31, 31, 45, 0.95);
+  background: #1e1e20;
   width: 100%;
   box-sizing: border-box;
   pointer-events: auto; }
 
 .backdrop {
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
   background-size: cover;
   pointer-events: auto; }
 
@@ -187,10 +191,10 @@ a:visited {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #ffffff;
   width: 600px;
   height: 400px;
-  background: crimson;
+  color: #ffffff;
+  background: #1e1e20;
   z-index: 95; }
 
 .posterElem:hover {

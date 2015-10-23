@@ -3,6 +3,8 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 	var DB_ENDPOINT = ENDPOINT_URI + 'collection';
 	var collection = null;
 
+	var fullCollection = null;
+
 	function create( name ) {
 		// collection needs to be resolved first
 		// todo check if collection is alredy exists

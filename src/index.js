@@ -32,6 +32,7 @@ angular.module( 'app', [
 .factory( 'movieCollection', require( './movieCollection.fac.js' ) )
 .directive( 'collectionModal', require( './collectionModal.dir.js' ) )
 .factory( 'collectionModalService', require( './collectionModalService.fac.js' ) )
+.directive( 'collectionItem', require( './collectionItem.dir.js' ) )
 
 .config( [ '$stateProvider', '$urlRouterProvider', '$httpProvider',
 function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
@@ -39,9 +40,9 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 	$urlRouterProvider.otherwise( '/' );
 
 	$stateProvider
-		.state( 'home', {
+		.state( 'helix', {
 			url: '/',
-			templateUrl: './template/home.html'
+			templateUrl: './template/helix.html'
 		} )
 		.state( 'movieDetail', {
 			url: '/movie/:movieId',
