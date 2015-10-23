@@ -1,9 +1,33 @@
 @import 'mixins'
 @import 'color'
 
+#movie-collection
+	+full-width-height
+	color: $w1
+	padding-top: 40px
+	background: $body-bg
+	pointer-events: auto
+
 .movie-collection-container
 	+size( 200px, 250px )
-	background: crimson
+	display: inline-block
+	background: $dark-grey
 	border-radius: 10px
 	box-sizing: border-box
 	padding: 10px
+	margin: 20px
+
+.movie-collection-header
+	font-size: 20px
+	font-weight: bold
+	margin: 5px 0px
+
+.movie-collection-trash
+	cursor: pointer
+	float: right
+
+.movie-collection-thumbnail
+	+size( 40px, 60px )
+	float: left
+	display: inline-block
+	margin: 2.5px

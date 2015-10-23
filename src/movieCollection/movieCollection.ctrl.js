@@ -5,4 +5,8 @@ module.exports = [ 'log', '$scope', 'auth', 'movieCollection', function ( log, $
 	var vm = this;
 	vm.movieCollection = movieCollection;
 
+	vm.range = function( n ) {
+		return new Array( n );   
+	};
+
 } ];

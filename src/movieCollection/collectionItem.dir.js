@@ -8,10 +8,10 @@ module.exports = [ 'log', 'TMDb', function ( log, TMDb ) {
 			// log.debug( 'info', 'collectionItemDirective', res );
 			var imgUrl = 'http://image.tmdb.org/t/p/w154/' + res.poster_path;
 			$element.css( {
-				'width': '50px',
-				'height': '70px',
+				'width': '100%',
+				'height': '100%',
 				'background-repeat': 'no-repeat',
-				'background-size': '50px 70px',
+				'background-size': '100% 100%',
 				'background-image': 'url(' + imgUrl + ')'
 			} );
 
