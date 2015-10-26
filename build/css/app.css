@@ -207,7 +207,8 @@ a:visited {
   color: #ffffff;
   padding-top: 40px;
   background: #141414;
-  pointer-events: auto; }
+  pointer-events: auto;
+  overflow-y: auto; }
 
 .movie-collection-container {
   width: 200px;
