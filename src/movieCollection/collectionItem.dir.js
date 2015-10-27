@@ -6,7 +6,7 @@ module.exports = [ 'log', 'TMDb', function ( log, TMDb ) {
 		.then( function ( res ) {
 
 			// log.debug( 'info', 'collectionItemDirective', res );
-			var imgUrl = 'http://image.tmdb.org/t/p/w154/' + res.poster_path;
+			var imgUrl = 'http://image.tmdb.org/t/p/w92/' + res.poster_path;
 			$element.css( {
 				'width': '100%',
 				'height': '100%',
