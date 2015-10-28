@@ -15,7 +15,7 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 	}
 
 	function fetchAll( collectionName ) {
-		
+
 	}
 
 	function resolveCollection() {
