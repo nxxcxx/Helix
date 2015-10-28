@@ -6,6 +6,9 @@ body {
   font-family: sans-serif;
   overflow: hidden; }
 
+p {
+  text-align: justify; }
+
 ul {
   list-style: none; }
 
@@ -16,6 +19,9 @@ ul, li {
 h1 {
   font-weight: bold;
   margin-top: 10px; }
+
+h2, h3, h4 {
+  margin-top: 0px; }
 
 input {
   padding: 0px;
@@ -186,16 +192,21 @@ a:visited {
   background-position: center;
   pointer-events: auto; }
 
-.collection-modal {
+.close-btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 400px;
-  color: #ffffff;
-  background: #1e1e20;
-  z-index: 95; }
+  top: 35px;
+  right: 30px;
+  font-size: 26px;
+  cursor: pointer; }
+
+.add-btn {
+  width: 150px;
+  height: 35px;
+  border-radius: 3px;
+  margin-top: 5px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer; }
 
 .posterElem:hover {
   cursor: pointer;
@@ -215,7 +226,7 @@ a:visited {
   height: 250px;
   display: inline-block;
   background: #1e1e20;
-  border-radius: 10px;
+  border-radius: 5px;
   box-sizing: border-box;
   padding: 10px;
   margin: 20px; }
@@ -235,3 +246,67 @@ a:visited {
   float: left;
   display: inline-block;
   margin: 2.5px; }
+
+.collection-modal-backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5); }
+
+.collection-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 470px;
+  height: 330px;
+  color: #ffffff;
+  background: #1e1e20;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 30px; }
+
+.collection-modal-body-left {
+  width: 50%;
+  height: 235px;
+  position: relative;
+  display: inline-block;
+  float: left; }
+
+.collection-modal-body-right {
+  width: 50%;
+  height: 235px;
+  display: inline-block;
+  float: left;
+  overflow-y: auto;
+  position: relative; }
+
+.collection-close-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 20px;
+  cursor: pointer; }
+
+.collection-modal-row {
+  height: 25px;
+  cursor: default;
+  vertical-align: middle;
+  line-height: 25px;
+  border-bottom: 1px solid grey;
+  padding: 0 5px 0 5px; }
+  .collection-modal-row:hover {
+    background: rgba(255, 255, 255, 0.05); }
+  .collection-modal-row .col-label {
+    float: left; }
+  .collection-modal-row .col-icon {
+    float: right;
+    cursor: pointer; }
+
+.collection-add-page {
+  position: absolute;
+  width: 210px;
+  height: 235px;
+  right: 30px;
+  background: #1e1e20; }

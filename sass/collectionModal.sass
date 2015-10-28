@@ -1,0 +1,61 @@
+.collection-modal-backdrop
+	+pos-abs
+	+size( 100%, 100% )
+	z-index: 100
+	background-color: rgba( 0, 0, 0, 0.5 )
+
+.collection-modal
+	+absolute-center
+	+size( 470px, 330px )
+	color: $w1
+	background: $col-primary
+	box-sizing: border-box
+	border-radius: 5px
+	padding: 30px
+
+.collection-modal-body-left
+	+size( 50%, 235px )
+	position: relative
+	// background: crimson
+	display: inline-block
+	float: left
+
+	& img
+		// +absolute-center
+
+.collection-modal-body-right
+	+size( 50%, 235px )
+	// background: orange
+	display: inline-block
+	float: left
+	overflow-y: auto
+	position: relative
+
+.collection-close-btn
+	+pos-abs( top 30px right 30px )
+	font-size: 20px
+	cursor: pointer
+
+.collection-modal-row
+	height: 25px
+	cursor: default
+	vertical-align: middle
+	line-height: 25px
+	border-bottom: 1px solid grey
+	padding: 0 5px 0 5px
+
+	&:hover
+		background: rgba( 255, 255, 255, 0.05 )
+
+	& .col-label
+		float: left
+
+	& .col-icon
+		float: right
+		cursor: pointer
+
+.collection-add-page
+	+pos-abs
+	+size( 210px, 235px )
+	right: 30px
+	background: $col-primary

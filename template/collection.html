@@ -2,7 +2,7 @@
 
 		<div ng-if="mc.movieCollection.isEmpty()">Collection is empty...</div>
 
-		<div class="movie-collection-container" ng-repeat="collection in mc.movieCollection.getCollection()">
+		<div class="movie-collection-container" ng-repeat="collection in mc.movieCollection.getCollection()" ng-click="mc.viewCollection( collection )">
 
 			<div class="movie-collection-header">
 				{{ collection.collectionName }}

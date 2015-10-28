@@ -1,5 +1,5 @@
-module.exports = [ 'log', '$scope', 'TMDb', '$cacheFactory', 'movieItem', 'collectionModalService',
-function( log, $scope, TMDb, $cacheFactory, movieItem, collectionModalService ) {
+module.exports = [ 'log', '$scope', 'TMDb', '$cacheFactory', 'movieItem', 'collectionModalService', 'movieCollection',
+function( log, $scope, TMDb, $cacheFactory, movieItem, collectionModalService, movieCollection ) {
 
 	var vm = this;
 	vm.movieItem = movieItem; // movieItem injected via state resolve

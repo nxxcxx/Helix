@@ -6,14 +6,16 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 	var fullCollection = null;
 
 	function create( name ) {
-		// collection needs to be resolved first
-		// todo check if collection is alredy exists
 		collection.push( { collectionName: name, movies: [] } );
 		put();
 	}
 
 	function isEmpty() {
 		return collection.length === 0;
+	}
+
+	function fetchAll( collectionName ) {
+		
 	}
 
 	function resolveCollection() {
@@ -64,9 +66,6 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 			} );
 	}
 
-	/* collections needs to be resolved first
-	update local collection
-	*/
 	function push( itemId, toCollection ) {
 		if ( hasItem( itemId, toCollection ) ) {
 			return false;

@@ -1,12 +1,17 @@
 module.exports = [ 'log', '$scope', 'auth', 'movieCollection', function ( log, $scope, auth, movieCollection )  {
 
-	window.movieCollection = movieCollection;
 	log.debug( 'info', 'collectionCtrl', movieCollection.getCollection() );
 	var vm = this;
 	vm.movieCollection = movieCollection;
 
-	vm.range = function( n ) {
-		return new Array( n );   
+	vm.viewCollection = function ( collection ) {
+		console.log( collection );
+		/* call movieCollection.fetchAll()
+			clearHelix()
+			call make helix w/ fetched result
+			ui state -> helix
+		*/
 	};
+
 
 } ];
