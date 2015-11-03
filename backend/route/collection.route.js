@@ -25,9 +25,11 @@ router.route( '/collection' )
 			if ( err ) return res.status( 401 ).send( err );
 
 			Collection.findOne( { userId: payload.userId }, function ( err, collection ) {
+
 				if ( err ) return res.status( 500 ).send( 'WTF' );
 				if ( collection ) return res.status( 200 ).send( collection.toJSON() );
 				res.status( 200 ).send();
+
 			} );
 
 		} );

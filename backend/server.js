@@ -7,6 +7,7 @@ var cors = require( 'cors' );
 var moment = require( 'moment' );
 var chalk = require( 'chalk' );
 
+
 mongoose.connect( 'mongodb://localhost/TMDb' );
 var db = mongoose.connection;
 db.on( 'error', console.error.bind( console, chalk.red( 'DB connection error' ) ) );
@@ -26,6 +27,7 @@ app.use( function ( req, res, next ) {
 	next();
 } );
 
+// routes
 app.use( require( './route/TMDb.route.js' ) );
 app.use( require( './route/auth.route.js' ) );
 app.use( require( './route/collection.route.js' ) );
