@@ -26,7 +26,7 @@ router.route( '/collection' )
 
 			Collection.findOne( { userId: payload.userId }, function ( err, collection ) {
 				if ( err ) return res.status( 500 ).send( 'WTF' );
-				if ( collection ) res.status( 200 ).send( collection.toJSON() );
+				if ( collection ) return res.status( 200 ).send( collection.toJSON() );
 				res.status( 200 ).send();
 			} );
 
@@ -37,8 +37,7 @@ router.route( '/collection' )
 
 		if ( !req.body ) {
 			console.log( 'PUT', 'req.body empty' );
-			res.status( 200 ).send( 'empty body' );
-			return;
+			return res.status( 200 ).send( 'empty body' );
 		}
 
 		if ( !req.headers.authorization )
@@ -62,7 +61,7 @@ router.route( '/collection' )
 
 			Collection.update( { userId: payload.userId }, collection, { upsert: true }, function ( err ) {
 				if ( err ) return res.status( 500 ).send( 'WTF' );
-				res.status( 200 ).send( collection );
+				return res.status( 200 ).send( collection );
 			} );
 
 		} );

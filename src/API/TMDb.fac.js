@@ -95,16 +95,15 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 			return;
 		}
 
-		$http( {
-			method: 'GET',
+		$http.get( TMDB_API.url + 'search/movie', {
 			cache: true,
-			url: TMDB_API.url + 'search/movie',
-			params:{
+			params: {
 				api_key: TMDB_API.key,
 				query: searchObj.query,
 				page: currPage
 			}
-		} ).then( function ( res ) {
+		} )
+		.then( function ( res ) {
 			// emit event search success
 			searchResult = searchResult.concat( removeNoPosterItems( res.data.results ) );
 			totalPages = res.data.total_pages;
@@ -116,9 +115,8 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 			res.data.results.forEach( function ( item ) {
 
 				if ( !movieIdCache.get( item.id ) ) {
-					console.log( item.id, item );
+					log.debug( 'api', item.id, item );
 					movieIdCache.put( item.id, item );
-					// putItemToDB( item );
 				}
 
 			} );
