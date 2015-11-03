@@ -8,10 +8,10 @@ function ( log, $scope, TMDb, EVT, helix, ENGINE, auth, $state ) {
 	};
 	vm.movieItems = null;
 
-	$scope.$watch( TMDb.getRes, function ( movItems ) {
+	$scope.$watch( TMDb.getRes, function ( movItems, oldMovItems ) {
 
 		vm.movieItems = movItems;
-		helix.makeHelixPosters( movItems.slice( TMDb.prevResultLen ), TMDb.prevResultLen );
+		helix.makeHelixPosters( movItems.slice( oldMovItems.length ), oldMovItems.length );
 
 	}, true );
 

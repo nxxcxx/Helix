@@ -2,7 +2,6 @@ module.exports = [ 'log', '$http', 'TMDB_API', 'EVT', '$cacheFactory', '$q', 'EN
 function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 
 	var searchResult = [];
-	var prevResultLen = 0;
 	var totalPages = -1;
 	var currPage = 1;
 
@@ -108,7 +107,6 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 			searchResult = searchResult.concat( removeNoPosterItems( res.data.results ) );
 			totalPages = res.data.total_pages;
 			currPage ++;
-			prevResultLen = searchResult.length;
 			log.debug( 'api', 'searchByTitle:', res, res.data );
 
 			// cache
@@ -141,7 +139,6 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 	function clearSearch() {
 		// emit event clearSeach
 		searchResult.length = 0;
-		prevResultLen = 0;
 		totalPages = -1;
 		currPage = 1;
 	}
@@ -151,7 +148,6 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 		searchById,
 		clearSearch,
 		getRes,
-		prevResultLen,
 		putItemToDB,
 		movieIdCache
 	};
