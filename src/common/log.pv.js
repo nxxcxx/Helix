@@ -26,7 +26,7 @@ module.exports = [ function () {
 			} else if ( debugName === 'warn' ) {
 				console.warn.apply( console, slicedArgs );
 			} else if ( debugNamespaces.indexOf( debugName ) !== -1 ) {
-				console.log.apply( console, slicedArgs );
+				console.log.apply( console, [ debugName ].concat( slicedArgs ) );
 			}
 		}
 

@@ -23,21 +23,21 @@ function ( log, movieCollection, collectionModalService, EVT ) {
 		};
 
 		vm.addToCollection = function ( movieId, collectionName ) {
-			log.debug( 'info', 'addToCollection:', movieId, collectionName );
+			log.debug( 'collection', 'addToCollection:', movieId, collectionName );
 			var success = movieCollection.push( movieId, collectionName );
-			log.debug( 'info', 'movieCollection.push', success );
+			log.debug( 'collection', 'movieCollection.push', success );
 		};
 
 		// default css at directive initialization
 		$element.css( { visibility: 'hidden' } );
 
 		EVT.collectionModalOpen.listen( function () {
-			log.debug( 'info', 'collectionModalOpen' );
+			log.debug( 'collection', 'collectionModalOpen' );
 		$element.css( { visibility: 'visible' } );
 		} );
 
 		EVT.collectionModalClose.listen( function () {
-			log.debug( 'info', 'collectionModalClose' );
+			log.debug( 'collection', 'collectionModalClose' );
 		$element.css( { visibility: 'hidden' } );
 		} );
 

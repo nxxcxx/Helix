@@ -11,18 +11,18 @@ function ( log, $scope, $http, ENDPOINT_URI, authToken, $state ) {
 				return;
 			}
 
-			log.debug( 'info', 'signing up...' );
+			log.debug( 'auth', 'signing up...' );
 			$http.post( ENDPOINT_URI + 'signup', vm.user )
 				.then( function ( res ) {
 
-					log.debug( 'info', 'Registered.', res );
+					log.debug( 'auth', 'Registered.', res );
 
 					authToken.setToken( res.data.token );
 					$state.go( 'collection' );
 
 				}, function ( err ) {
 
-					log.debug( 'warn', err );
+					log.debug( 'err', err );
 					vm.form.$submitted = false;
 
 				} );

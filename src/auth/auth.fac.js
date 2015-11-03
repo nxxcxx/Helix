@@ -19,14 +19,14 @@ function ( log, ENDPOINT_URI, $http, $q, authToken ) {
 				$http.get( ENDPOINT_URI + 'auth', { requireAuth: true } )
 					.then( function ( res ) {
 
-						log.debug( 'info', 'auth.authorize():', res, res.data );
+						log.debug( 'auth', 'auth.authorize():', res, res.data );
 						identity = res.data;
 						_identityResolved = true;
 						deferred.resolve( true );
 
 					}, function ( err ) {
 
-						log.debug( 'warn', 'authorize', err, err.data );
+						log.debug( 'err', 'authorize', err, err.data );
 						// todo if jwt expired , deauthorize, remove local storage, redirect
 						_identityResolved = true;
 						deferred.reject( err );

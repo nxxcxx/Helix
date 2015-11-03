@@ -1,6 +1,6 @@
 module.exports = [ 'log', '$scope', 'auth', 'movieCollection', function ( log, $scope, auth, movieCollection )  {
 
-	log.debug( 'info', 'collectionCtrl', movieCollection.getCollection() );
+	log.debug( 'collection', 'collectionCtrl', movieCollection.getCollection() );
 	var vm = this;
 	vm.movieCollection = movieCollection;
 

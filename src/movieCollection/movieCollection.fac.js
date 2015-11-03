@@ -27,7 +27,7 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 		} else {
 			$http.get( DB_ENDPOINT, { requireAuth: true } )
 				.then( function ( res ) {
-					log.debug( 'info', 'collection.resolveCollection():', res );
+					log.debug( 'collection', 'collection.resolveCollection():', res );
 					if ( res.data ) {
 						collection = res.data;
 					} else {
@@ -35,7 +35,7 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 					}
 					deferred.resolve( true );
 				}, function ( err ) {
-					log.debug( 'warn', 'collection.resolveCollection():', err );
+					log.debug( 'err', 'collection.resolveCollection():', err );
 					deferred.reject( err );
 				} );
 		}
@@ -60,7 +60,7 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 	function put() {
 		$http.put( DB_ENDPOINT, collection, { requireAuth: true } )
 			.then( function ( res ) {
-				log.debug( 'info', 'collection.put():', res );
+				log.debug( 'collection', 'collection.put():', res );
 			}, function ( err ) {
 				log.debug( 'err', 'collection.put():', err );
 			} );
@@ -116,7 +116,7 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 
 	function _clear() {
 		collection = null;
-		log.debug( 'info', 'local collection cleared.' );
+		log.debug( 'collection', 'local collection cleared.' );
 	}
 
 	return {

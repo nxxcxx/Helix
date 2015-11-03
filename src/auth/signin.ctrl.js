@@ -10,17 +10,17 @@ function ( log, $scope, $http, ENDPOINT_URI, authToken, $state )  {
 	vm.signin = function() {
 
 		if ( vm.user.email === '' || vm.user.password === '' ) {
-			log.debug( 'warn', 'email & password required.' );
+			log.debug( 'auth', 'email & password required.' );
 			return;
 		}
 
 		$http.post( ENDPOINT_URI + 'signin', vm.user )
 			.then( function( res ) {
-				log.debug( 'info', 'signin', res, res.data );
+				log.debug( 'auth', 'signin', res, res.data );
 				authToken.setToken( res.data.token );
 				$state.go( 'collection' );
 			}, function( err, status ) {
-				log.debug( 'warn', 'signin', err );
+				log.debug( 'err', 'signin', err );
 			} );
 
 	};

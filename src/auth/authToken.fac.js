@@ -18,7 +18,7 @@ module.exports = [ 'log', '$window', function ( log, $window ) {
 	function removeToken() {
 		cachedToken = null;
 		storage.removeItem( 'jwt' );
-		log.debug( 'info', 'token removed' );
+		log.debug( 'auth', 'token removed' );
 	}
 
 	function hasToken() {

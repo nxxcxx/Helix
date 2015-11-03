@@ -15,7 +15,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 		// todo dont put exisiting item in db ( UPSERT )
 		$http.put( DB_ENDPOINT + movieItem.id, movieItem )
 		.then( function ( res ) {
-			log.debug( 'info', 'PUT:', res );
+			log.debug( 'api', 'PUT:', res );
 		}, function ( err ) {
 			log.debug( 'err', 'PUT:', err );
 		} );
@@ -24,7 +24,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 	function searchIdFromDB( id ) {
 		var promise = $http.get( DB_ENDPOINT + id )
 		.then( function ( res ) {
-			log.debug( 'info', 'searchById => DB:', res.data );
+			log.debug( 'api', 'searchById => DB:', res.data );
 			if ( res.data ) {
 				movieIdCache.put( res.data.id, res.data );
 				return res.data;
@@ -41,7 +41,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 		var promise = $http.get( TMDB_API.url + 'movie/' + id, {
 			params: { api_key: TMDB_API.key }
 		} ).then( function ( res ) {
-			log.debug( 'info', 'searchById => API:', res.data );
+			log.debug( 'api', 'searchById => API:', res.data );
 			movieIdCache.put( res.data.id, res.data );
 			putItemToDB( res.data );
 			return res.data;
@@ -58,7 +58,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 
 		var cachedItem = movieIdCache.get( id );
 		if ( cachedItem ) {
-			log.debug( 'info', 'searchById => cache:', cachedItem );
+			log.debug( 'api', 'searchById => cache:', cachedItem );
 			df_Res.resolve( cachedItem );
 			return df_Res.promise;
 		}
@@ -110,7 +110,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 			totalPages = res.data.total_pages;
 			currPage ++;
 			prevResultLen = searchResult.length;
-			log.debug( 'info', 'searchByTitle:', res, res.data );
+			log.debug( 'api', 'searchByTitle:', res, res.data );
 
 			// cache
 			res.data.results.forEach( function ( item ) {
@@ -125,7 +125,7 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 
 		}, function ( err ) {
 			// emit event search err
-			log.debug( 'searchByTitle:', err );
+			log.debug( 'err', 'searchByTitle:', err );
 		} );
 
 	}
