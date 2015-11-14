@@ -6,7 +6,7 @@
 
 			<div class="movie-collection-header">
 				{{ collection.collectionName }}
-				<i class="fa fa-trash movie-collection-trash" ng-click="mc.movieCollection.removeCollection( collection.collectionName )"></i>
+				<i hover-class hover="fa-trash" leave="fa-trash-o" class="fa fa-trash-o movie-collection-trash" ng-click="mc.movieCollection.removeCollection( collection.collectionName )"></i>
 			</div>
 
 			<div class="movie-collection-thumbnail" ng-repeat="movieId in collection.movies | limitTo: 12">

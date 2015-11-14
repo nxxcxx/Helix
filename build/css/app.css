@@ -4,6 +4,7 @@ body {
   padding: 0px;
   background: #141414;
   font-family: sans-serif;
+  font-weight: lighter;
   overflow: hidden; }
 
 p {
@@ -208,6 +209,9 @@ a:visited {
   font-size: 16px;
   cursor: pointer; }
 
+.bookmark-btn {
+  cursor: pointer; }
+
 .posterElem:hover {
   cursor: pointer;
   border: 2px solid #ffffff; }
@@ -229,7 +233,8 @@ a:visited {
   border-radius: 5px;
   box-sizing: border-box;
   padding: 10px;
-  margin: 20px; }
+  margin: 20px;
+  cursor: pointer; }
 
 .movie-collection-header {
   font-size: 20px;
@@ -281,6 +286,14 @@ a:visited {
   float: left;
   overflow-y: auto;
   position: relative; }
+  .collection-modal-body-right::-webkit-scrollbar {
+    width: 5px; }
+  .collection-modal-body-right::-webkit-scrollbar {
+    background: #1e1e20; }
+  .collection-modal-body-right::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    border-radius: 3px;
+    background: #ffffff; }
 
 .collection-close-btn {
   position: absolute;
@@ -291,7 +304,7 @@ a:visited {
 
 .collection-modal-row {
   height: 25px;
-  cursor: default;
+  cursor: pointer;
   vertical-align: middle;
   line-height: 25px;
   border-bottom: 1px solid grey;
@@ -310,3 +323,15 @@ a:visited {
   height: 235px;
   right: 30px;
   background: #1e1e20; }
+  .collection-add-page input {
+    width: 180px;
+    height: 23px;
+    padding-left: 5px;
+    font-size: 14px; }
+  .collection-add-page button {
+    width: 90px;
+    height: 21px; }
+
+.new-collection-btn {
+  font-size: 15px;
+  text-align: center; }

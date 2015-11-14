@@ -3,16 +3,22 @@
 	<div class="backdrop"></div>
 
 	<div class="movie-content">
-		<h1>{{ md.movieItem.fullTitle }} ({{ md.movieItem.release_date.substr(0,4) }})</h1>
+
+
+		<h2>
+			<i hover-class hover="fa-bookmark" leave="fa-bookmark-o" class="fa fa-bookmark-o bookmark-btn" ng-click="md.openCollectionModal()"></i>
+			&nbsp;{{ md.movieItem.fullTitle }}   &nbsp;&nbsp;{{ md.movieItem.release_date.substr(0,4) }}
+		</h2>
+
 		<i class="fa fa-star"></i> {{ md.movieItem.vote_average }}
-		&nbsp
+		&nbsp;
 		<i class="fa fa-language"></i> {{ md.movieItem.original_language }}
 
 		<p>{{ md.movieItem.overview }}</p>
 
 		<i ui-sref="helix" class="fa fa-angle-left close-btn"></i>
 
-		<button class="add-btn btn-navy" ng-click="md.openCollectionModal()"><i class="fa fa-plus"></i> Add to collection</button>
+		<!-- <button class="add-btn btn-navy" ng-click="md.openCollectionModal()"><i class="fa fa-plus"></i> Add to collection</button> -->
 
 	</div>
 

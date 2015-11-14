@@ -14,10 +14,6 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 		return collection.length === 0;
 	}
 
-	function fetchAll( collectionName ) {
-
-	}
-
 	function resolveCollection() {
 
 		var deferred = $q.defer();

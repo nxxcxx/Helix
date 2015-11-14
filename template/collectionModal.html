@@ -7,24 +7,33 @@
 			<img ng-src="http://image.tmdb.org/t/p/w154/{{ modal.collectionModalService.getActiveItem().poster_path }}">
 		</div>
 
-		<i class="fa fa-close collection-close-btn" ng-click="modal.collectionModalService.close()"></i>
+		<i class="fa fa-close collection-close-btn" ng-click="modal.closeModal()"></i>
 
 		<div class="collection-modal-body-right">
 
-			<button ng-click="modal.openEditor()">+ NEW COLLECTION</button>
+			<!-- <button ng-click="modal.openEditor()">+ NEW COLLECTION</button> -->
+			<!-- <i hover-class hover="fa-file" leave="fa-file-o" class="fa fa-file-o new-collection-btn" ng-click="modal.openEditor()"></i> -->
 
 			<ul>
-				<li class="collection-modal-row" ng-repeat="collection in modal.movieCollection.getCollection()">
+				<li class="collection-modal-row"
+					ng-repeat="collection in modal.movieCollection.getCollection()"
+					ng-click="modal.addToCollection( modal.collectionModalService.getActiveItem().id, collection.collectionName )"
+				>
 					<div class="col-label">
 						{{ collection.collectionName }}
 					</div>
 					<div class="col-icon">
 						<i
-							class="fa fa-plus"
-							ng-if="!modal.movieCollection.hasItem( modal.collectionModalService.getActiveItem().id, collection.collectionName )"
+							class="fa fa-check"
+							ng-if="modal.movieCollection.hasItem( modal.collectionModalService.getActiveItem().id, collection.collectionName )"
 							ng-click="modal.addToCollection( modal.collectionModalService.getActiveItem().id, collection.collectionName )"
 						></i>
 					</div>
+				</li>
+				<li class="collection-modal-row new-collection-btn" ng-click="modal.openEditor()">
+					<i hover-class hover="fa-file" leave="fa-file-o" class="fa fa-file-o new-collection-btn">
+					</i>
+					New Collection
 				</li>
 			</ul>
 
@@ -33,7 +42,7 @@
 
 		<div class="collection-add-page" ng-show="modal.addingNewCollection">
 
-			<input type="text" placeholder="Collection title" ng-model="newCollectionName">
+			<input type="text" placeholder="Collection Title" ng-model="newCollectionName">
 			<br><br>
 			<button type="button" ng-click="modal.createNewCollection()">Create</button>
 			<button type="button" ng-click="modal.closeEditor()">Cancel</button>

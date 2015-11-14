@@ -1,4 +1,4 @@
-module.exports = [ 'log', 'EVT', function ( log, EVT ) {
+module.exports = [ 'log', 'EVT', 'auth', '$state', function ( log, EVT, auth, $state ) {
 
 	var activeItem = null;
 
@@ -11,7 +11,11 @@ module.exports = [ 'log', 'EVT', function ( log, EVT ) {
 	}
 
 	function open() {
-		EVT.collectionModalOpen.emit();
+		if ( auth.isAuthenticated() ) {
+			EVT.collectionModalOpen.emit();
+		} else {
+			$state.go( 'signin' );
+		}
 	}
 
 	function close() {

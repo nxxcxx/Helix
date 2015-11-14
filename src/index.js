@@ -35,6 +35,8 @@ angular.module( 'app', [
 .directive( 'collectionModal', require( './movieCollection/collectionModal.dir.js' ) )
 .directive( 'collectionItem', require( './movieCollection/collectionItem.dir.js' ) )
 
+.directive( 'hoverClass', require( './directive/hoverClass.dir.js' ) )
+
 .config( require( './config/routeConfig.js' ) )
 .config( require( './config/logConfig.js' ) )
 .config( require( './config/httpConfig.js' ) )
