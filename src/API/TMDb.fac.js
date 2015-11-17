@@ -11,7 +11,6 @@ function ( log, $http, TMDB_API, EVT, $cacheFactory, $q, ENDPOINT_URI ) {
 	var DB_ENDPOINT = ENDPOINT_URI + 'movie/';
 
 	function putItemToDB( movieItem ) {
-		// todo dont put exisiting item in db ( UPSERT )
 		$http.put( DB_ENDPOINT + movieItem.id, movieItem )
 		.then( function ( res ) {
 			log.debug( 'api', 'PUT:', res );

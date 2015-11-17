@@ -13,6 +13,10 @@ module.exports = [ '$rootScope', function ( $rootScope ) {
 		collectionModalClose: {
 			listen: function ( cb ) { $rootScope.$on( 'collectionModalClose', cb ); },
 			emit: function () { $rootScope.$broadcast( 'collectionModalClose' ); }
+		},
+		helixNeedsReset: {
+			listen: function ( cb ) { $rootScope.$on( 'helixNeedsReset', cb ); },
+			emit: function () { $rootScope.$broadcast( 'helixNeedsReset' ); }
 		}
 
 	};

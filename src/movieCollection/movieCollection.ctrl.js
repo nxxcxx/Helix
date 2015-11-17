@@ -1,5 +1,5 @@
-module.exports = [ 'log', '$scope', 'auth', 'movieCollection', 'TMDb', 'helix', 'ENGINE', '$state',
-function ( log, $scope, auth, movieCollection, TMDb, helix, ENGINE, $state )  {
+module.exports = [ 'log', '$scope', 'auth', 'movieCollection', 'TMDb', 'helix', 'ENGINE', '$state', 'EVT',
+function ( log, $scope, auth, movieCollection, TMDb, helix, ENGINE, $state, EVT )  {
 
 	log.debug( 'collection', 'collectionCtrl', movieCollection.getCollection() );
 	var vm = this;
@@ -28,6 +28,8 @@ function ( log, $scope, auth, movieCollection, TMDb, helix, ENGINE, $state )  {
 						ENGINE.resetCamera();
 						helix.makeHelixPosters( allMovies, 0 );
 						$state.go( 'helix' );
+						TMDb.clearSearch();
+						EVT.helixNeedsReset.emit();
 
 					}
 				} );

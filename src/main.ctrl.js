@@ -1,5 +1,5 @@
-module.exports = [ 'log', '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE', 'auth', '$state',
-function ( log, $scope, TMDb, EVT, helix, ENGINE, auth, $state ) {
+module.exports = [ 'log', '$scope', 'TMDb', 'EVT', 'helix', 'ENGINE', 'auth', '$state', '$rootScope',
+function ( log, $scope, TMDb, EVT, helix, ENGINE, auth, $state, $rootScope ) {
 
 	var vm = this;
 	vm.auth = auth;
@@ -16,13 +16,19 @@ function ( log, $scope, TMDb, EVT, helix, ENGINE, auth, $state ) {
 	}, true );
 
 	var prevQuery = '';
+	var helixNeedsReset = false;
+	EVT.helixNeedsReset.listen( function () {
+		helixNeedsReset = true;
+	} );
+
 	vm.search = function () {
 		if ( vm.search.query === '' ) return;
-		if ( prevQuery !== vm.search.query ) {
+		if ( prevQuery !== vm.search.query || helixNeedsReset ) {
 			prevQuery = vm.search.query;
 			TMDb.clearSearch();
 			helix.clearAll();
 			ENGINE.resetCamera();
+			helixNeedsReset = false;
 		}
 		if ( $state.current.name !== 'helix' ) {
 			$state.go( 'helix' );
