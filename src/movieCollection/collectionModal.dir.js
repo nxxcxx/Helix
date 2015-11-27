@@ -18,9 +18,11 @@ function ( log, movieCollection, collectionModalService, EVT ) {
 		};
 
 		vm.createNewCollection = function () {
-			movieCollection.create( $scope.newCollectionName );
-			$scope.newCollectionName = '';
-			vm.closeEditor();
+			if ( $scope.newCollectionName ) {
+				movieCollection.create( $scope.newCollectionName );
+				$scope.newCollectionName = '';
+				vm.closeEditor();
+			}
 		};
 
 		vm.addToCollection = function ( movieId, collectionName ) {

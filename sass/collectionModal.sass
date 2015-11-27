@@ -1,10 +1,16 @@
 @import 'color'
 
+.collection-modal-backdrop-root
+	+pos-abs
+	+size( 100%, 100% )
+	z-index: 100
+
 .collection-modal-backdrop
 	+pos-abs
 	+size( 100%, 100% )
 	z-index: 100
 	background-color: rgba( 0, 0, 0, 0.5 )
+	pointer-events: none
 
 .collection-modal
 	+absolute-center
@@ -14,6 +20,7 @@
 	box-sizing: border-box
 	border-radius: 5px
 	padding: 30px
+	pointer-events: auto
 
 .collection-modal-body-left
 	+size( 50%, 235px )
@@ -44,7 +51,7 @@
 
 .collection-close-btn
 	+pos-abs( top 30px right 30px )
-	font-size: 20px
+	font-size: 16px
 	cursor: pointer
 
 .collection-modal-row
@@ -75,11 +82,21 @@
 		+size( 180px, 23px )
 		padding-left: 5px
 		font-size: 14px
+		background: $g1
+		color: $w1
 
 	& button
-		+size( 90px, 21px )
+		+size( 88px, 21px )
+		border-radius: 3px
+		color: $w1
+		border: none
+		cursor: pointer
 
+		&.modal-btn-create
+			background: $dark-navy
 
+		&.modal-btn-cancel
+			background: $dark-navy
 
 .new-collection-btn
 	font-size: 15px

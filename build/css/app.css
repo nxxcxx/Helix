@@ -121,13 +121,15 @@ a:visited {
   .search-input input {
     width: 100%;
     height: 100%;
-    padding-left: 30px; }
+    padding-left: 30px;
+    background: #4a4a4a;
+    color: #ffffff; }
 
 .search-input-icon {
   position: absolute;
   top: 5px;
   left: 5px;
-  color: #1e1e20;
+  color: #ffffff;
   font-size: 20px; }
 
 .nav-icons {
@@ -252,12 +254,19 @@ a:visited {
   display: inline-block;
   margin: 2.5px; }
 
+.collection-modal-backdrop-root {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100; }
+
 .collection-modal-backdrop {
   position: absolute;
   width: 100%;
   height: 100%;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.5); }
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none; }
 
 .collection-modal {
   position: absolute;
@@ -270,7 +279,8 @@ a:visited {
   background: #1e1e20;
   box-sizing: border-box;
   border-radius: 5px;
-  padding: 30px; }
+  padding: 30px;
+  pointer-events: auto; }
 
 .collection-modal-body-left {
   width: 50%;
@@ -299,7 +309,7 @@ a:visited {
   position: absolute;
   top: 30px;
   right: 30px;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer; }
 
 .collection-modal-row {
@@ -327,10 +337,20 @@ a:visited {
     width: 180px;
     height: 23px;
     padding-left: 5px;
-    font-size: 14px; }
+    font-size: 14px;
+    background: #4a4a4a;
+    color: #ffffff; }
   .collection-add-page button {
-    width: 90px;
-    height: 21px; }
+    width: 88px;
+    height: 21px;
+    border-radius: 3px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer; }
+    .collection-add-page button.modal-btn-create {
+      background: #37646f; }
+    .collection-add-page button.modal-btn-cancel {
+      background: #37646f; }
 
 .new-collection-btn {
   font-size: 15px;
