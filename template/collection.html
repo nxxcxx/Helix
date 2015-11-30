@@ -1,5 +1,6 @@
 <div id="movie-collection">
 
+		<br>
 		<div ng-if="mc.movieCollection.isEmpty()">Collection is empty...</div>
 
 		<div class="movie-collection-container" ng-repeat="collection in mc.movieCollection.getCollection()" ng-click="mc.viewCollection( collection )">

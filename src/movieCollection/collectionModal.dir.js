@@ -26,9 +26,13 @@ function ( log, movieCollection, collectionModalService, EVT ) {
 		};
 
 		vm.addToCollection = function ( movieId, collectionName ) {
-			log.debug( 'collection', 'addToCollection:', movieId, collectionName );
-			var success = movieCollection.push( movieId, collectionName );
-			log.debug( 'collection', 'movieCollection.push', success );
+			if ( movieCollection.hasItem( movieId, collectionName ) ) {
+				movieCollection.remove( movieId, collectionName );
+			} else {
+				log.debug( 'collection', 'addToCollection:', movieId, collectionName );
+				var success = movieCollection.push( movieId, collectionName );
+				log.debug( 'collection', 'movieCollection.push', success );
+			}
 		};
 
 		vm.closeModal = function () {
