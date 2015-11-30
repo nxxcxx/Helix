@@ -1,0 +1,29 @@
+@import 'mixins'
+@import 'color'
+
+#collection-settings
+	+full-width-height
+	color: $w1
+	padding: 60px 25px
+	background: $col-bg
+	pointer-events: auto
+	overflow-y: auto
+
+	& button
+		+size( 88px, 25px )
+		border-radius: 3px
+		color: $w1
+		border: none
+		cursor: pointer
+
+		&.stt-btn-rename
+			background: $dark-navy
+
+		&.stt-btn-delete
+			background: crimson
+
+.col-stt-input
+	+size( 250px, 25px )
+	padding: 2px
+	background: #4a4a4a
+	color: $w1

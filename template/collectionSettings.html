@@ -1,0 +1,11 @@
+<div id="collection-settings">
+	<h1>{{ mcs.collectionName }}</h1>
+	<div>Rename collection</div>
+	<input class="col-stt-input" type="text" placeholder="Rename" ng-model="mcs.settings.newName">
+	<button class="stt-btn-rename" type="button" ng-click="mcs.renameCollection()"> Rename </button>
+	<br>
+	<br>
+	<div>Delete collection</div>
+	<input class="col-stt-input" type="text" placeholder="Type in this collection name to confirm" ng-model="mcs.settings.deleteNameConfirm">
+	<button class="stt-btn-delete" type="button" ng-click="mcs.deleteCollection()"> Delete </button>
+</div>

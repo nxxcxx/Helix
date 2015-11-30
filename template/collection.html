@@ -3,17 +3,20 @@
 		<br>
 		<div ng-if="mc.movieCollection.isEmpty()">Collection is empty...</div>
 
-		<div class="movie-collection-container" ng-repeat="collection in mc.movieCollection.getCollection()" ng-click="mc.viewCollection( collection )">
+		<div class="movie-collection-container" ng-repeat="collection in mc.movieCollection.getCollection()">
 
 			<div class="movie-collection-header">
 				{{ collection.collectionName }}
-				<i hover-class hover="fa-trash" leave="fa-trash-o" class="fa fa-trash-o movie-collection-trash" ng-click="mc.movieCollection.removeCollection( collection.collectionName )"></i>
+				<!-- <i class="fa fa-gear movie-collection-trash" ng-click="mc.movieCollection.removeCollection( collection.collectionName )"></i> -->
+				<i class="fa fa-gear movie-collection-trash" ng-click="mc.showCollectionSettings( collection )"></i>
 			</div>
 
-			<div class="movie-collection-thumbnail" ng-repeat="movieId in collection.movies | limitTo: 12">
-				<!-- debug: {{ movieId }} -->
-				<collection-item ng-if="$index < 12" movie-id="{{movieId}}"></collection-item>
-				<!-- <button type="button" ng-click="mc.movieCollection.remove( movieId, collection.collectionName )">X</button> -->
+			<div ng-click="mc.viewCollection( collection )">
+				<div class="movie-collection-thumbnail" ng-repeat="movieId in collection.movies | limitTo: 12">
+					<!-- debug: {{ movieId }} -->
+					<collection-item ng-if="$index < 12" movie-id="{{movieId}}"></collection-item>
+					<!-- <button type="button" ng-click="mc.movieCollection.remove( movieId, collection.collectionName )">X</button> -->
+				</div>
 			</div>
 
 		</div>

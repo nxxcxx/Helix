@@ -36,8 +36,12 @@ function ( log, $scope, auth, movieCollection, TMDb, helix, ENGINE, $state, EVT 
 
 		} );
 
-
 	};
 
+	vm.showCollectionSettings = function ( collection ) {
+
+		$state.go( 'collectionSettings', { collectionName: collection.collectionName } );
+
+	};
 
 } ];

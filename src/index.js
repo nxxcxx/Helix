@@ -34,6 +34,7 @@ angular.module( 'app', [
 .factory( 'collectionModalService', require( './movieCollection/collectionModalService.fac.js' ) )
 .directive( 'collectionModal', require( './movieCollection/collectionModal.dir.js' ) )
 .directive( 'collectionItem', require( './movieCollection/collectionItem.dir.js' ) )
+.controller( 'collectionSettings', require( './movieCollection/collectionSettings.ctrl.js' ) )
 
 .directive( 'hoverClass', require( './directive/hoverClass.dir.js' ) )
 

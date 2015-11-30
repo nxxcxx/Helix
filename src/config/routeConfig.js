@@ -35,7 +35,7 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 				} ]
 			}
 		} )
-		.state('collection', {
+		.state( 'collection', {
 			url: '/collection',
 			templateUrl: './template/collection.html',
 			controller: 'movieCollectionCtrl',
@@ -48,7 +48,13 @@ function ( $stateProvider, $urlRouterProvider, $httpProvider ) {
 					return movieCollection.resolveCollection();
 				} ]
 			}
-		})
+		} )
+		.state( 'collectionSettings', {
+			url: '/collection/settings/:collectionName',
+			templateUrl: './template/collectionSettings.html',
+			controller: 'collectionSettings',
+			controllerAs: 'mcs'
+		} )
 	;
 
 } ];

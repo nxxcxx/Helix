@@ -102,8 +102,15 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 		return false;
 	}
 
-	function sync() {
-		// sync local colelction w/ DB
+	function renameCollection( collectionName,  newName ) {
+		for ( var i = 0; i < collection.length; i ++ ) {
+			if ( collection[i].collectionName === collectionName ) {
+				collection[i].collectionName = newName;
+				put();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	function getCollection() {
@@ -122,7 +129,7 @@ module.exports = [ 'log', 'ENDPOINT_URI', '$http', '$q', function ( log, ENDPOIN
 		put,
 		remove,
 		removeCollection,
-		sync,
+		renameCollection,
 		_clear,
 		resolveCollection,
 		hasItem,
